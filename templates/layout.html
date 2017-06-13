@@ -13,6 +13,16 @@
 	    <script src="{{ url_for("static", filename="js/main.js") }}" defer></script>
     </head>
     <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-default">Show Boards</button>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-default">Create Board</button>
+                </div>
+            </div>
+        </nav>
         {% block content %}
         {% endblock %}
     </body>
