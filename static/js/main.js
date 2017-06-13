@@ -1,1 +1,3 @@
-console.log(localData.boards[1].title);
+setupJson();
+var jsonObject =  readFromJson()
+console.log(jsonObject.boards[0].title);
