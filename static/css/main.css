@@ -33,17 +33,19 @@ body {
     color: #ffffff;
 }
 
-#card-input-field {
-    color: #ffffff;
-}
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #ffffff;
 }
 
 .btn {
-    display: inline-block;
+    float: left;
     margin: 8px;
+    display: block;
+}
+
+#card-input-field {
+    color: #ffffff;
+    float:left;
 }
 
 .board {
@@ -61,6 +63,20 @@ body {
 }
 
 .card {
+    text-align: center;
+    color: white;
+    background-color: crimson;
+    padding: 12px;
+    border: 1px solid #c61236;
+    border-radius: 6px;
+    margin: 12px;
+    font-size: 20px;
+    min-width: 170px;
+    cursor: pointer;
+    float: left;
+}
+
+.card-intro {
     text-align: center;
     color: white;
     background-color: crimson;
