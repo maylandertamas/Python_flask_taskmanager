@@ -18,8 +18,11 @@ function showCardPage(dataObject) {
         boardId = $(this).data("board-id");
         var boardTitle = dataObject.boards[boardId].title;
         $('#cards-head').append('<h1 id="board-title">' + boardTitle + '</h1>');
+        $("#cards-head").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button' data-board-id='" + boardId + "'> +</span></div>");
         // Append cards container with cards
-         
+        for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
+            $("#new").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+        }
         /*
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
         $("#cards-container").append("<div class='col-md-3 card'>" + dataObject.boards[boardId].cards[i].title + "</div>");
@@ -48,28 +51,30 @@ function addBoard(dataObject) {
 }
 
 function addNewCard(dataObject) {
-    $("#cards-container").append("<button type='button' class='btn' id='back-button'>BACK</button>");
-    $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>");
-    $(document).on('click',  '#add-card-button', function() {
+
+        $(document).on('click', '#add-card-button', function () {
+        boardId = $(this).data("board-id");
         var newCardTitle = $(this).prev().val();
+        var newCardId = cardIdGenerator(dataObject).toString();
         
-         var newObject =  {
-                "id": cardIdGenerator(dataObject).toString(),
+        var newObject =  {
+                "id": newCardId,
                 "title": newCardTitle,
                 "status": "new",
                 "order": cardOrderGenerator(dataObject, boardId).toString()
          } 
          dataObject.boards[boardId].cards.push(newObject);
-         printCards(dataObject, boardId);
-    });
-    
+         console.log(newObject);
+         $("#new").append("<div class='card actual-cards'>" + newObject.title + "</div>");
+         // printCards(dataObject, boardId);
+        });
 }
 
 function printCards(dataObject, boardId) {
-    $("#prog-container").css({"display": "block"});
+    // $("#prog-container").css({"display": "block"});
     $(".actual-cards").remove();
-    $("#cards-container").append("<button type='button' class='btn' id='back-button'>BACK</button>");
-    $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>")
+    // $("#cards-container").append("<button type='button' class='btn' id='back-button'>BACK</button>");
+    // $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>")
     for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
             $("#new").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
     }
@@ -78,12 +83,15 @@ function printCards(dataObject, boardId) {
 
 function backToBoardPage(dataObject) {
     $(document).on('click', '#back-button', function() {
-        $("#boards-head").css({"display": "block"});
         $("#cards-container").css({"display": "none"});
+        $("#cards-head").css({"display": "none"});
+        $("#cards-head").empty();
+        $("#boards-head").css({"display": "block"});
         $("#boards-container").css({"display": "block"});
-        $(".card").remove();
+        $(".actual-cards").remove();
         $("#board-title").remove();
-        $('#header-container').css({"display": "none"})
+        $("#input-field").val("");
+        // $('#header-container').css({"display": "none"})
 
     });
 }
@@ -95,7 +103,7 @@ function main() {
 
     // Create an object from local storage string.
     var dataObject = readFromJson();
-    var boardId
+    var boardId;
     // Print boards.
     printBoards(dataObject);
 
@@ -105,7 +113,7 @@ function main() {
 
     // Show the clicked board cards
     showCardPage(dataObject);
-    // addNewCard(dataObject);
+    addNewCard(dataObject);
     backToBoardPage(dataObject);
 }
 
