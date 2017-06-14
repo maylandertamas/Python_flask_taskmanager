@@ -23,8 +23,8 @@ function showCardPage(dataObject) {
 }
 
 function addBoard(dataObject) {
-     $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New board'><span id='add-button'> +</span></div>");
-     $('#add-button').click(function(){
+     $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New board'><span id='add-board-button'> +</span></div>");
+     $('#add-board-button').click(function(){
 
             // Get the new board title from impu.
             var newBoardTitle = $(this).prev().val();
@@ -41,19 +41,30 @@ function addBoard(dataObject) {
 }
 
 function addNewCard(dataObject) {
-    $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New card'><span id='add-button'> +</span></div>");
-    $(document).on('click',  '.card')
+    $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>");
+    $(document).on('click',  '#add-card-button', function() {
+        var newCardTitle = $(this).prev().val();
+        var boardId = $(this).attr("board-id");
+        console.log(boardId);
+        /*
+         var newObject =  {
+                "id": cardIdGenerator(dataObject).toString(),
+                "title": newCardTitle,
+                "status": "new",
+                "order": cardOrderGenerator(dataObject, boardId)
+         } */
+    });
     
 }
 
-function main() {
 
+function main() {
+ 
     // Read JSON to get initial data.
     setupJson();
 
     // Create an object from local storage string.
     var dataObject = readFromJson();
-
     // Print boards.
     printBoards(dataObject);
 
@@ -63,9 +74,7 @@ function main() {
 
     // Show the clicked board cards
     showCardPage(dataObject);
-
-   
-    
+    addNewCard(dataObject);
 }
 
 $(document).ready(main);
