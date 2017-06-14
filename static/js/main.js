@@ -5,23 +5,8 @@ function printBoards(dataObject) {
     }
 }
 
-function main() {
-
-    // Read JSON to get initial data.
-    setupJson();
-
-    // Create an object from local storage string.
-    var dataObject = readFromJson();
-
-    // Print boards.
-    printBoards(dataObject);
-
-    // Add create new board field.
-    $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New board'><span id='add-button'> +</span></div>");
-
-    // Show the clicked board cards
+function showCardPage(dataObject) {
     $(document).on("click" , ".board", function(){
-
         // Hide boards container and show cards container
         $("#boards-container").css({"display": "none"});
         $("#cards-container").css({"display": "block"});
@@ -35,8 +20,11 @@ function main() {
         }
     
     });
+}
 
-    $('#add-button').click(function(){
+function addBoard(dataObject) {
+     $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New board'><span id='add-button'> +</span></div>");
+     $('#add-button').click(function(){
 
             // Get the new board title from impu.
             var newBoardTitle = $(this).prev().val();
@@ -48,10 +36,35 @@ function main() {
                 "cards": []
             }
             dataObject.boards.push(newObject);
-            // alert(dataObject.boards[boardId].cards[i].id);
-            // alert(Object.keys(dataObject.boards))
             return printBoards(dataObject);
         });
+}
+
+function addNewCard(dataObject) {
+    $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New card'><span id='add-button'> +</span></div>");
+    $(document).on('click',  '.card')
+    
+}
+
+function main() {
+
+    // Read JSON to get initial data.
+    setupJson();
+
+    // Create an object from local storage string.
+    var dataObject = readFromJson();
+
+    // Print boards.
+    printBoards(dataObject);
+
+    // Add create new board field.
+    
+    addBoard(dataObject);
+
+    // Show the clicked board cards
+    showCardPage(dataObject);
+
+   
     
 }
 
