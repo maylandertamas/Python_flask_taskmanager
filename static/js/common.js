@@ -9,9 +9,12 @@ function cardIdGenerator(dataObject) {
 }
 
 function cardOrderGenerator(dataObject, boardId) {
-    var cardIdArray = [];
+    var cardOrderArray = [];
     for (var j = 0; j < Object.keys(dataObject.boards[boardId].cards).length; j++) {
-        cardIdArray.push(Number(dataObject.boards[boardId].cards[j].order));
+        cardOrderArray.push(Number(dataObject.boards[boardId].cards[j].order));
     }
-    console.log(cardIdArray);
+    if (cardOrderArray.length === 0) {
+        return 1;
+    }
+    return Math.max.apply(Math, cardOrderArray) + 1;
 }

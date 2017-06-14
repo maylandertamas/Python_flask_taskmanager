@@ -12,7 +12,7 @@ function showCardPage(dataObject) {
         $("#cards-container").css({"display": "block"});
 
         // Get board id from html data.
-        var boardId = $(this).data("board-id");
+        boardId = $(this).data("board-id");
 
         // Append cards container with cards
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
@@ -27,7 +27,7 @@ function addBoard(dataObject) {
      $('#add-board-button').click(function(){
 
             // Get the new board title from impu.
-            var newBoardTitle = $(this).prev().val();
+            newBoardTitle = $(this).prev().val();
 
             var newObject =  {
                 "id": Object.keys(dataObject.boards).length,
@@ -44,15 +44,14 @@ function addNewCard(dataObject) {
     $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>");
     $(document).on('click',  '#add-card-button', function() {
         var newCardTitle = $(this).prev().val();
-        var boardId = $(this).attr("board-id");
-        console.log(boardId);
-        /*
+        
          var newObject =  {
                 "id": cardIdGenerator(dataObject).toString(),
                 "title": newCardTitle,
                 "status": "new",
-                "order": cardOrderGenerator(dataObject, boardId)
-         } */
+                "order": cardOrderGenerator(dataObject, boardId).toString()
+         } 
+         console.log(newObject);
     });
     
 }
@@ -65,6 +64,7 @@ function main() {
 
     // Create an object from local storage string.
     var dataObject = readFromJson();
+    var boardId
     // Print boards.
     printBoards(dataObject);
 
