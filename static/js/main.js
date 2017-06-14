@@ -1,7 +1,7 @@
 function printBoards(dataObject) {
-    $('.boards').empty();
     for (var i = 0; i < Object.keys(dataObject.boards).length; i++) {
-    $(".boards").append("<div class='col-md-3 board' data-board-id='" + i + "'>" + dataObject.boards[i].title + "</div>");
+    $("#boards-container").append("<div class='board' data-board-id='" + i + "'>" 
+    + dataObject.boards[i].title + "</div>");
     }
 }
 
@@ -25,7 +25,7 @@ function showCardPage(dataObject) {
 }
 
 function addBoard(dataObject) {
-     $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New board'><span id='add-board-button'> +</span></div>");
+     // $("#new-board").append("<div class='board-input'><input id='input-field' type='text' placeholder='New board'><span id='add-board-button'> +</span></div>");
      $('#add-board-button').click(function(){
 
             // Get the new board title from impu.
@@ -38,7 +38,7 @@ function addBoard(dataObject) {
                 "cards": []
             }
             dataObject.boards.push(newObject);
-            return printBoards(dataObject);
+            $("#boards-container").append("<div class='board' data-board-id='" + newObject.id + "'>" + newBoardTitle + "</div>");
         });
 }
 
