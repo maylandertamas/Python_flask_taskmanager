@@ -4,9 +4,18 @@
 
 <div class="container">
     <div id="boards-container">
-        <div id="new-board">
+        <div class="col-md-6 card" id="intro">
+            <h1>Simple on the surface, with more under the hood.</h1>
+            <p>
+                A ProMan board is a list of lists, filled with cards, used by you and your team. 
+                It’s a lot more than that, though. Trello has everything you need to organize projects 
+                of any size.
+            </p>
+            <!-- <img src="{{ url_for("static", filename="img/body2.png") }}" style="width: 100%;" /> -->
         </div>
-        <div class="boards">
+        <div class='board-input'>
+            <input id='input-field' type='text' placeholder='New board'>
+            <span id='add-board-button'> +</span>
         </div>
     </div>
     <div id="cards-container">

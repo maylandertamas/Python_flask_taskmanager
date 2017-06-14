@@ -1,5 +1,5 @@
 * {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -15,6 +15,32 @@ body {
     display: none;
 }
 
+#intro {
+    float: left;
+    box-sizing: border-box;
+    background-color: #f5f5dc;
+    color: #4d4d4d;
+    border: 1px solid #dcdcc6;
+    border-radius: 6px;
+    cursor: default;
+}
+
+#intro h1{
+    font-weight: bold;
+}
+
+#input-field {
+    color: #ffffff;
+}
+
+#card-input-field {
+    color: #ffffff;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ffffff;
+}
+
 .btn {
     display: inline-block;
     margin: 8px;
@@ -25,13 +51,13 @@ body {
     color: white;
     background-color: crimson;
     padding: 12px;
-    border: 1px solid red;
+    border: 1px solid #c61236;
     border-radius: 6px;
     margin: 12px;
     font-size: 20px;
-    display: inline-block;
-    min-width: 150px;
+    min-width: 170px;
     cursor: pointer;
+    float: left;
 }
 
 .card {
@@ -39,13 +65,13 @@ body {
     color: white;
     background-color: crimson;
     padding: 12px;
-    border: 1px solid red;
+    border: 1px solid #c61236;
     border-radius: 6px;
     margin: 12px;
     font-size: 20px;
-    display: inline-block;
-    min-width: 150px;
+    min-width: 170px;
     cursor: pointer;
+    float: left;
 }
 
 .board-input {
@@ -57,9 +83,9 @@ body {
     border-radius: 6px;
     margin: 12px;
     font-size: 20px;
-    display: inline-block;
     min-width: 150px;
     cursor: pointer;
+    float: left;
 }
 
 input {
@@ -74,12 +100,10 @@ input:focus {
 }
 
 #new-board {
-    display: inline-block;
     float: left;
 }
 
 .boards {
-    display: inline-block;
     float: left;
 }
 
