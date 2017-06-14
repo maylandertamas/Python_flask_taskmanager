@@ -51,9 +51,18 @@ function addNewCard(dataObject) {
                 "status": "new",
                 "order": cardOrderGenerator(dataObject, boardId).toString()
          } 
-         console.log(newObject);
+         dataObject.boards[boardId].cards.push(newObject);
+         printCards(dataObject, boardId);
     });
     
+}
+
+function printCards(dataObject, boardId) {
+    $("#cards-container").empty();
+         $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>")
+         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
+            $("#cards-container").append("<div class='col-md-3 card'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+        }
 }
 
 
