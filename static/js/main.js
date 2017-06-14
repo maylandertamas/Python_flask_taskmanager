@@ -10,10 +10,11 @@ function showCardPage(dataObject) {
         // Hide boards container and show cards container
         $("#boards-container").css({"display": "none"});
         $("#cards-container").css({"display": "block"});
-
+        $('#header-container').css({"display": "block"})
         // Get board id from html data.
         boardId = $(this).data("board-id");
-
+        var boardTitle = dataObject.boards[boardId].title;
+        $('#header-container').append('<h1 id="board-title">' + boardTitle + '</h1>');
         // Append cards container with cards
          
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
@@ -73,6 +74,9 @@ function backToBoardPage(dataObject) {
         $("#cards-container").css({"display": "none"});
         $("#boards-container").css({"display": "block"});
         $(".card").remove();
+        $("#board-title").remove();
+        $('#header-container').css({"display": "none"})
+
     });
 }
 
