@@ -6,23 +6,24 @@ body {
     background-color: #f2f2f2;
 }
 
-#boards-container {
-    margin-top: 20px;
-}
-
 #cards-container {
     margin-top: 20px;
     display: none;
 }
 
 #intro {
-    float: left;
+    text-align: center;
     box-sizing: border-box;
     background-color: #f5f5dc;
     color: #4d4d4d;
     border: 1px solid #dcdcc6;
     border-radius: 6px;
     cursor: default;
+    padding: 10px;
+}
+
+#prog-container {
+    display: none;
 }
 
 #intro h1{
@@ -37,15 +38,17 @@ body {
   color: #ffffff;
 }
 
+.row {
+    margin-top: 10px;
+}
+
 .btn {
-    float: left;
     margin: 8px;
-    display: block;
+    display: inline-block;
 }
 
 #card-input-field {
     color: #ffffff;
-    float:left;
 }
 
 .board {
@@ -59,7 +62,7 @@ body {
     font-size: 20px;
     min-width: 170px;
     cursor: pointer;
-    float: left;
+
 }
 
 .card {
@@ -73,10 +76,10 @@ body {
     font-size: 20px;
     min-width: 170px;
     cursor: pointer;
-    float: left;
+
 }
 
-.card-intro {
+.card-intros {
     text-align: center;
     color: white;
     background-color: crimson;
@@ -87,7 +90,7 @@ body {
     font-size: 20px;
     min-width: 170px;
     cursor: pointer;
-    float: left;
+
 }
 
 .board-input {
@@ -97,11 +100,11 @@ body {
     padding: 12px;
     border: 1px solid red;
     border-radius: 6px;
-    margin: 12px;
     font-size: 20px;
     min-width: 150px;
     cursor: pointer;
-    float: left;
+    box-sizing: border-box;
+
 }
 
 input {
@@ -116,11 +119,11 @@ input:focus {
 }
 
 #new-board {
-    float: left;
+
 }
 
 .boards {
-    float: left;
+
 }
 
 .card-input {

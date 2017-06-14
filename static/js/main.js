@@ -9,17 +9,22 @@ function showCardPage(dataObject) {
     $(document).on("click" , ".board", function(){
         // Hide boards container and show cards container
         $("#boards-container").css({"display": "none"});
-        $("#cards-container").css({"display": "block"});
-        $('#header-container').css({"display": "block"})
+        $("#boards-head").css({"display": "none"});
+        $("#cards-head").css({"display": "block"});
+        $('#cards-container').css({"display": "block"})
+
+        $("#cards-head").append("<button type='button' class='btn' id='back-button'>BACK</button>");
         // Get board id from html data.
         boardId = $(this).data("board-id");
         var boardTitle = dataObject.boards[boardId].title;
-        $('#header-container').append('<h1 id="board-title">' + boardTitle + '</h1>');
+        $('#cards-head').append('<h1 id="board-title">' + boardTitle + '</h1>');
         // Append cards container with cards
          
+        /*
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
         $("#cards-container").append("<div class='col-md-3 card'>" + dataObject.boards[boardId].cards[i].title + "</div>");
-        }
+    }
+    */
     
     });
 }
@@ -61,16 +66,19 @@ function addNewCard(dataObject) {
 }
 
 function printCards(dataObject, boardId) {
-    $("#cards-container").empty();
+    $("#prog-container").css({"display": "block"});
+    $(".actual-cards").remove();
     $("#cards-container").append("<button type='button' class='btn' id='back-button'>BACK</button>");
     $("#cards-container").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='New card'><span id='add-card-button'> +</span></div>")
     for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
-            $("#cards-container").append("<div class='col-md-3 card'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+            $("#new").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
     }
 }
 
+
 function backToBoardPage(dataObject) {
     $(document).on('click', '#back-button', function() {
+        $("#boards-head").css({"display": "block"});
         $("#cards-container").css({"display": "none"});
         $("#boards-container").css({"display": "block"});
         $(".card").remove();
@@ -97,7 +105,7 @@ function main() {
 
     // Show the clicked board cards
     showCardPage(dataObject);
-    addNewCard(dataObject);
+    // addNewCard(dataObject);
     backToBoardPage(dataObject);
 }
 

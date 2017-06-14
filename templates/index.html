@@ -2,24 +2,43 @@
 
 {% block content %}
 <div class="container">
-    <div id="header-container"></div>
-    <div id="boards-container">
-        <div class="col-md-6 card-intro" id="intro">
-            <h1>Simple on the surface, with more under the hood.</h1>
-            <p>
-                A ProMan board is a list of lists, filled with cards, used by you and your team. 
-                It’s a lot more than that, though. ProMan has everything you need to organize projects 
-                of any size. by DrACT&trade;
-            </p>
-            <!-- <img src="{{ url_for("static", filename="img/body2.png") }}" style="width: 100%;" /> -->
+    <div class="row" id="boards-head">
+        <div class="col-md-6">
+            <div id="intro">
+                <h1>Simple on the surface, with more under the hood.</h1>
+                <p>
+                    A ProMan board is a list of lists, filled with cards, used by you and your team. 
+                    It’s a lot more than that, though. ProMan has everything you need to organize projects 
+                    of any size. Business solutions by DrACT&trade;
+                </p>
+                <!-- <img src="{{ url_for("static", filename="img/body2.png") }}" style="width: 100%;" /> -->
+            </div>
         </div>
-        <div class='board-input'>
-            <input id='input-field' type='text' placeholder='New board'>
-            <span id='add-board-button'> +</span>
+        <div class='col-md-6'>
+            <div class="board-input">
+                <input id='input-field' type='text' placeholder='New board'>
+                <span id='add-board-button'> +</span>
+            </div>
         </div>
     </div>
-    <div id="cards-container">
+    <div class="row" id="boards-container">
     </div>
+    <div class="row" id="cards-head">
+    </div>
+    <div class="row" id="cards-container">
+            <div class="col-md-3 card-holder" id="new">
+                new
+            </div>
+            <div class="col-md-3 card-holder" id="in-progress">
+                in-progress
+            </div>
+            <div class="col-md-3 card-holder" id="review">
+                rewiev
+            </div>
+            <div class="col-md-3 card-holder" id="done">
+                done
+            </div>
+        </div>
 </div>
 
 {% endblock %}
