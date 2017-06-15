@@ -7,7 +7,7 @@ body {
 }
 
 h2 {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 #cards-container {
@@ -163,23 +163,31 @@ input:focus {
 #new {
     min-height: 100vh;
     background-color: #e3dac9;
+    padding-top: 10px;
 }
 
 #in-progress {
     background-color: #EAD3A8;
     min-height: 100vh;
+    padding-top: 10px;
 }
 
 #review {
     color: #ffffff;
     min-height: 100vh;
     background-color: #6E6568;
+    padding-top: 10px;
 }
 
 #done {
     color: #ffffff;
     background-color: #484043;
     min-height: 100vh;
+    padding-top: 10px;
+}
+
+.col-md-3 {
+    padding: 0px;
 }
 
 .panel {
