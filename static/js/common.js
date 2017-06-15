@@ -22,13 +22,10 @@ function cardOrderGenerator(dataObject, boardId) {
 function changeCardStatus(dataObject, event, ui, newStatus, boardId) {
     var draggedObject = ui.item[0];
             var cardId = $(draggedObject).data("cardId");
-            console.log($(draggedObject).text());
-            console.log(dataObject.boards[boardId].cards[0].status);
 
             for (i = 0; i < dataObject.boards[boardId].cards.length; i++) {
                 if (dataObject.boards[boardId].cards[i].id == cardId) {
                     dataObject.boards[boardId].cards[i].status = newStatus;
-                    console.log(dataObject.boards[boardId].cards);
                 }
             }
 }

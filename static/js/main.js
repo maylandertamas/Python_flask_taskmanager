@@ -26,7 +26,6 @@ function showCardPage(dataObject) {
 
         // Append cards to the proper container
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
-            console.log(dataObject.boards[boardId].cards.status)
             switch (dataObject.boards[boardId].cards[i].status) {
                 case "in progress": $("#in-progress").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
                     break;
@@ -74,8 +73,6 @@ function addNewCard(dataObject) {
                 "order": cardOrderGenerator(dataObject, boardId).toString()
          } 
          dataObject.boards[boardId].cards.push(newObject);
-         console.log(newObject);
-         // $("#new").append("<div class='card actual-cards'>" + newObject.title + "</div>");
          $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
         });
 }
@@ -95,9 +92,6 @@ function backToBoardPage(dataObject) {
 }
 
 function clogSpin(dataObject) {
-    /* $(document).on('mouseover',  ".clog", function() {
-    $(this).toggleClass("fa-spin");
-    });*/ 
 
     $(document).on({
     mouseenter: function () {
@@ -108,18 +102,33 @@ function clogSpin(dataObject) {
         }
     }, ".clog");
 
-
     $(document).on( 'click', ".clog", function(){
-        $(this).next().slideDown("slow");
-        });
+    $( "#dialog" ).dialog();
 
-    $(document).on( 'click', ".ok", function(){
-    $(".panel").slideUp("slow");
+    // Change title.
+    var boardId = $(this).prev().data("board-id");
+    console.log("ezt nezd", boardId);
+    changeTitle(dataObject, boardId);
+
     });
 
 };
 
-function someCrappyFunc(dataObject) {
+function changeTitle(dataObject, boardId) {
+    $(document).on('click', '#submit-new-title', function () {
+
+        console.log("anyad");
+        dataObject.boards[boardId].title = $("#change-title").val();
+        console.log(dataObject.boards[boardId]);
+        $("#dialog").css({"display": "none"});
+        $("#boards-container").empty();
+        return printBoards(dataObject);
+
+
+    });
+}
+
+function cardDragger(dataObject) {
     $( function() {
         $( "#new" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
@@ -164,7 +173,7 @@ function main() {
     // Show the clicked board cards
     showCardPage(dataObject);
 
-    someCrappyFunc(dataObject);
+    cardDragger(dataObject);
 
 
 
@@ -176,6 +185,7 @@ function main() {
 
     // Clog spin.
     clogSpin(dataObject);
+    
 }
 
 $(document).ready(main);

@@ -64,6 +64,11 @@ h2 {
     color: #4d4d4d;
 }
 
+#dialog {
+    background-color: crimson;
+    display: none;
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #ffffff;
 }
