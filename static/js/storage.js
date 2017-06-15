@@ -1,5 +1,5 @@
 function setupJson() {
-    $.getJSON("/static/database/sample_data.json", function(json){
+    $.getJSON("/static/database/pm10.json", function(json){
         var strJson = JSON.stringify(json);
         localStorage.setItem("localData", strJson);
     });

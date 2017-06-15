@@ -12,6 +12,10 @@ function printBoards(dataObject) {
 function showCardPage(dataObject) {
     $(document).on("click" , ".board", function() {
 
+        // Export JSON.
+        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataObject));
+        $('footer').html('<a href="data:' + data + '" download="data.json">download JSON</a>')
+
         // Hide boards container and show cards container.
         $("#boards-container").css({"display": "none"});
         $("#boards-head").css({"display": "none"});
@@ -82,6 +86,7 @@ function addNewCard(dataObject) {
 
         dataObject.boards[boardId].cards.push(newObject);
         $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
+        $("#card-input-field").val("");
     });
 }
 
@@ -165,7 +170,6 @@ function cardDragger(dataObject) {
 });
 }
 
-
 function main() {
  
     // Read JSON to get initial data.
@@ -186,8 +190,6 @@ function main() {
 
     cardDragger(dataObject);
 
-
-
     // Add new card to board.
     addNewCard(dataObject);
 
@@ -195,8 +197,7 @@ function main() {
     backToBoardPage(dataObject);
 
     // Clog spin.
-    clogSpin(dataObject);
-    
+    clogSpin(dataObject);   
 }
 
 $(document).ready(main);
