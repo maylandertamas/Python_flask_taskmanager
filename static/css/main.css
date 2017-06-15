@@ -31,7 +31,7 @@ h2 {
 }
 
 #intro h1{
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 #input-field {
@@ -39,7 +39,6 @@ h2 {
 }
 
 #cards-head * {
-    display: inline;
 }
 
 #back-button {
@@ -47,11 +46,22 @@ h2 {
     padding: 12px;
     border: 1px solid;
     border-radius: 6px;
-    margin: 12px;
+    margin-top: 10px;
     font-size: 20px;
-    display: inline-block;
     min-width: 150px;
     cursor: pointer;
+}
+
+#logo-copy h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #4d4d4d;
+    font-size: 75px;
+}
+
+#logo-copy p {
+    text-align: center;
+    color: #4d4d4d;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -123,6 +133,7 @@ h2 {
     min-width: 150px;
     cursor: pointer;
     box-sizing: border-box;
+    margin-top: 10px;
 
 }
 
@@ -173,9 +184,7 @@ input:focus {
     padding: 12px;
     border: 1px solid red;
     border-radius: 6px;
-    margin: 12px;
     font-size: 20px;
-    display: inline-block;
     min-width: 150px;
     cursor: pointer;
 }

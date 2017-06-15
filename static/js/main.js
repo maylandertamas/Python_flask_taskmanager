@@ -15,13 +15,13 @@ function showCardPage(dataObject) {
         $("#boards-head").css({"display": "none"});
         $("#cards-head").css({"display": "block"});
         $('#cards-container').css({"display": "block"})
-        $("#cards-head").append("<button type='button' class='btn' id='back-button'>BACK</button>");
 
         // Get board id from html data.
         boardId = $(this).data("board-id");
         var boardTitle = dataObject.boards[boardId].title;
         $('#cards-head').append('<h1 id="board-title">' + boardTitle + '</h1>');
         $("#cards-head").append("<div class='card-input'><input id='card-input-field' type='text' placeholder='Create new card'><span id='add-card-button' data-board-id='" + boardId + "'> +</span></div>");
+        $("#cards-head").append("<button type='button' class='btn' id='back-button'>BACK</button>");
 
         // Append cards to the proper container
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
