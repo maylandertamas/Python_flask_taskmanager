@@ -137,6 +137,15 @@ function main() {
     // Show the clicked board cards
     showCardPage(dataObject);
 
+
+
+ $( function() {
+    $( "#new" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
+    $( "#done" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
+    $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
+    $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
+});
+
     // Add new card to board.
     addNewCard(dataObject);
 
