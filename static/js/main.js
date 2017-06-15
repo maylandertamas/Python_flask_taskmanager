@@ -3,7 +3,7 @@ function printBoards(dataObject) {
     // For to get boards.
     for (var i = 0; i < Object.keys(dataObject.boards).length; i++) {
     $("#boards-container").append("<div class='board' data-board-id='" + i + "'>" 
-    + dataObject.boards[i].title + "</div>");
+    + dataObject.boards[i].title + " <i class='fa fa-cog fa-3x fa-fw clog'></i></div>");
     }
 }
 
@@ -89,6 +89,12 @@ function backToBoardPage(dataObject) {
     });
 }
 
+function clogSpin(dataObject) {
+    $( ".clog" ).hover(function() {
+    $(this).toggleClass("fa-spin");
+    });
+}
+
 function main() {
  
     // Read JSON to get initial data.
@@ -112,6 +118,9 @@ function main() {
 
     // Back to the boards page.
     backToBoardPage(dataObject);
+
+    // Clog spin.
+    clogSpin(dataObject);
 }
 
 $(document).ready(main);
