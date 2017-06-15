@@ -1,5 +1,5 @@
 * {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -44,7 +44,7 @@ h2 {
 #back-button {
     text-align: center;
     padding: 12px;
-    border: 1px solid;
+    // border: 1px solid #;
     border-radius: 6px;
     margin-top: 10px;
     font-size: 20px;
@@ -153,23 +153,24 @@ input:focus {
 }
 
 #new {
-    color: #ffffff;
-    background-color: #484043;
     min-height: 100vh;
+    background-color: #e3dac9;
 }
 
 #in-progress {
-    color: #ffffff;
-    background-color: #6E6568;
-    min-height: 100vh;
-}
-
-#review {
     background-color: #EAD3A8;
     min-height: 100vh;
 }
 
+#review {
+    color: #ffffff;
+    min-height: 100vh;
+    background-color: #6E6568;
+}
+
 #done {
+    color: #ffffff;
+    background-color: #484043;
     min-height: 100vh;
 }
 
