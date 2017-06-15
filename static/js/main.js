@@ -2,8 +2,9 @@ function printBoards(dataObject) {
 
     // For to get boards.
     for (var i = 0; i < Object.keys(dataObject.boards).length; i++) {
-    $("#boards-container").append("<div class='board' data-board-id='" + i + "'>" 
-    + dataObject.boards[i].title + " <i class='fa fa-cog fa-3x fa-fw clog'></i></div>");
+    $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + i +
+    "'>"
+    + dataObject.boards[i].title + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i><div class='panel'><button class='btn ok'>OK</button></div></div>");
     }
 }
 
@@ -52,7 +53,10 @@ function addBoard(dataObject) {
                 "cards": []
             }
             dataObject.boards.push(newObject);
-            $("#boards-container").append("<div class='board' data-board-id='" + newObject.id + "'>" + newBoardTitle + "</div>");
+            
+            $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" 
+            + newObject.id + "'>" + newObject.title + 
+            "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i></div>");
         });
 }
 
@@ -90,10 +94,30 @@ function backToBoardPage(dataObject) {
 }
 
 function clogSpin(dataObject) {
-    $( ".clog" ).hover(function() {
+    /* $(document).on('mouseover',  ".clog", function() {
     $(this).toggleClass("fa-spin");
+    });*/ 
+
+    $(document).on({
+    mouseenter: function () {
+        $(this).addClass("fa-spin");
+        },
+    mouseleave: function () {
+        $(this).removeClass("fa-spin");
+        }
+    }, ".clog");
+
+
+    $(document).on( 'click', ".clog", function(){
+        $(this).next().slideDown("slow");
+        });
+
+    $(document).on( 'click', ".ok", function(){
+    $(".panel").slideUp("slow");
     });
-}
+
+};
+
 
 function main() {
  

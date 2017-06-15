@@ -80,7 +80,7 @@ h2 {
     color: #ffffff;
 }
 
-.board {
+.board-design {
     text-align: center;
     color: white;
     background-color: crimson;
@@ -90,8 +90,11 @@ h2 {
     margin: 12px;
     font-size: 20px;
     min-width: 170px;
-    cursor: pointer;
     display: inline-block;
+}
+
+.board {
+    cursor: pointer;
 }
 
 .card {
@@ -174,8 +177,14 @@ input:focus {
     min-height: 100vh;
 }
 
+.panel {
+    display: none;
+    background-color: crimson;
+}
+
 .clog {
     font-size: 19px;
+    cursor: pointer;
 }
 
 .boards {
