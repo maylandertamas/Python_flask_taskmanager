@@ -6,6 +6,10 @@ body {
     background-color: #f2f2f2;
 }
 
+h2 {
+    margin-bottom: 40px;
+}
+
 #cards-container {
     margin-top: 20px;
     display: none;
@@ -40,8 +44,6 @@ body {
 
 #back-button {
     text-align: center;
-    // color: white;
-    // background-color: crimson;
     padding: 12px;
     border: 1px solid;
     border-radius: 6px;
@@ -135,8 +137,29 @@ input:focus {
     outline: none;
 }
 
-#new-board {
+#cards-container div {
+    text-align: center;
+}
 
+#new {
+    color: #ffffff;
+    background-color: #484043;
+    min-height: 100vh;
+}
+
+#in-progress {
+    color: #ffffff;
+    background-color: #6E6568;
+    min-height: 100vh;
+}
+
+#review {
+    background-color: #EAD3A8;
+    min-height: 100vh;
+}
+
+#done {
+    min-height: 100vh;
 }
 
 .boards {
