@@ -28,13 +28,13 @@ function showCardPage(dataObject) {
         for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
             console.log(dataObject.boards[boardId].cards.status)
             switch (dataObject.boards[boardId].cards[i].status) {
-                case "in progress": $("#in-progress").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+                case "in progress": $("#in-progress").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
                     break;
-                case "review": $("#review").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+                case "review": $("#review").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
                     break;
-                case "done": $("#done").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+                case "done": $("#done").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
                     break;
-                default: $("#new").append("<div class='card actual-cards'>" + dataObject.boards[boardId].cards[i].title + "</div>");
+                default: $("#new").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
             }
         }   
     });
@@ -75,7 +75,8 @@ function addNewCard(dataObject) {
          } 
          dataObject.boards[boardId].cards.push(newObject);
          console.log(newObject);
-         $("#new").append("<div class='card actual-cards'>" + newObject.title + "</div>");
+         // $("#new").append("<div class='card actual-cards'>" + newObject.title + "</div>");
+         $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
         });
 }
 
@@ -118,6 +119,32 @@ function clogSpin(dataObject) {
 
 };
 
+function someCrappyFunc(dataObject) {
+    $( function() {
+        $( "#new" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
+        update: function(event, ui) {
+            var newStatus = "new";
+            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+        }});
+
+        $( "#done" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
+        update: function(event, ui) {
+            var newStatus = "done";
+            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+        }});
+        $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
+        update: function(event, ui) {
+            var newStatus = "in progress";
+            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+        }});
+        $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
+        update: function(event, ui) {
+            var newStatus = "review";
+            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+        }});
+});
+}
+
 
 function main() {
  
@@ -137,14 +164,9 @@ function main() {
     // Show the clicked board cards
     showCardPage(dataObject);
 
+    someCrappyFunc(dataObject);
 
 
- $( function() {
-    $( "#new" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
-    $( "#done" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
-    $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
-    $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"]});
-});
 
     // Add new card to board.
     addNewCard(dataObject);
