@@ -44,12 +44,25 @@ h2 {
 #back-button {
     text-align: center;
     padding: 12px;
-    // border: 1px solid #;
+    border: none;
     border-radius: 6px;
     margin-top: 10px;
     font-size: 20px;
     min-width: 150px;
     cursor: pointer;
+}
+
+#submit-new-title {
+    text-align: center;
+    padding: 7px;
+    border-radius: 6px;
+    font-size: 12px;
+    background-color: #f5f5dc;
+    color: #4d4d4d;
+    border: 1px solid #dcdcc6;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #logo-copy h1 {
@@ -67,6 +80,7 @@ h2 {
 #dialog {
     background-color: crimson;
     display: none;
+    color: #ffffff;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -146,7 +160,7 @@ h2 {
 }
 
 input {
-    color: #000000;
+    color: #ffffff;
     border: none;
     border-radius: 6px;
     background-color: #dc143c;
@@ -184,6 +198,16 @@ input:focus {
     background-color: #484043;
     min-height: 100vh;
     padding-top: 10px;
+}
+
+.ui-dialog-titlebar {
+    background-image: none;
+    background-color: #f5f5dc;
+    color: #4d4d4d;
+}
+
+ui-dialog {
+    border: none;
 }
 
 .col-md-3 {

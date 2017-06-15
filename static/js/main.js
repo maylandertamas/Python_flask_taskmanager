@@ -105,9 +105,12 @@ function clogSpin(dataObject) {
     $(document).on( 'click', ".clog", function(){
     var boardId = $(this).prev().data("board-id");
     $( "#dialog" ).data('board_id', boardId).dialog();
+    $("span.ui-dialog-title").text('Change board title');
+    $(".ui-dialog-titlebar-close").hide();
+    $( "#dialog" ).dialog( "option", "width", 250 );
+    $("#change-title").val("");
 
     // Change title.
-    console.log("ezt nezd", boardId);
     changeTitle(dataObject, boardId);
 
     });
@@ -117,11 +120,9 @@ function clogSpin(dataObject) {
 function changeTitle(dataObject, boardId) {
     $(document).on('click', '#submit-new-title', function () {
 
-        // console.log("data id changeTitle", dataId)
         var boardIdChange = $("#dialog").data('board_id')
         dataObject.boards[boardIdChange].title = $("#change-title").val();
         $( "#dialog" ).dialog( "close" );
-        // console.log(dataObject.boards[boardId]);
         $("#boards-container").empty();
         return printBoards(dataObject);
 
