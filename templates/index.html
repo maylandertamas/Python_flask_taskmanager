@@ -1,7 +1,60 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div class="container">
+    <div class="row" id="boards-head">
+        <div class="col-md-6">
+            <div id="intro">
+                <h1>Simple on the surface, with more under the hood.</h1>
+                <p>
+                    A ProMan board is a list of lists, filled with cards, used by you and your team. 
+                    It’s a lot more than that, though. ProMan has everything you need to organize projects 
+                    of any size. Business solutions by DrACT&trade;
+                </p>
+            </div>
+        </div>
+        <div class='col-md-6' id="logo-copy">
+            <h1>ProMan</h1>
+            <p>always here for you</p>
+            <div class="board-input">
+                <input id='input-field' type='text' placeholder='Create new board'>
+                <span id='add-board-button'> +</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="boards-container">
+    </div>
+    <div class="row" id="cards-head">
+    </div>
+    <div class="row" id="cards-container">
+            <div class="col-md-3 card-holder" id="new-header">
+                <h2>New</h2>
+                <div id="new">
+                </div>
+            </div>
+            <div class="col-md-3 card-holder" id="in-progress-header">
+                <h2>In-progress</h2>
+                <div  id="in-progress">
+                </div>
+            </div>
+            <div class="col-md-3 card-holder" id="review-header">
+                <h2>Review</h2>
+                <div  id="review">
+                </div>
+            </div>
+            <div class="col-md-3 card-holder" id="done-header">
+                <h2>Done</h2>
+                <div  id="done">
+                </div>
+            </div>
+    </div>
+</div>
+<div id="dialog" title="Basic dialog">
+    <p>Please enter:</p>
+    <input type="text" id="change-title"></input>
+    <button type="submit" id="submit-new-title">Save</button>
+</div>
+<footer>
+</footer>
 
-<h1>Hello</h1>
-<h2>asfnasfjkafjkbasjfha</h2>
 {% endblock %}
