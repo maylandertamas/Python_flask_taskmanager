@@ -1,13 +1,13 @@
 * {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
     background-color: #f2f2f2;
 }
 
-#boards-container {
-    margin-top: 20px;
+h2 {
+    margin-bottom: 10px;
 }
 
 #cards-container {
@@ -16,20 +16,70 @@ body {
 }
 
 #intro {
-    float: left;
+    text-align: center;
     box-sizing: border-box;
     background-color: #f5f5dc;
     color: #4d4d4d;
     border: 1px solid #dcdcc6;
     border-radius: 6px;
     cursor: default;
+    padding: 10px;
+}
+
+#prog-container {
+    display: none;
 }
 
 #intro h1{
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 #input-field {
+    color: #ffffff;
+}
+
+#cards-head * {
+}
+
+#back-button {
+    text-align: center;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 20px;
+    min-width: 150px;
+    cursor: pointer;
+}
+
+#submit-new-title {
+    text-align: center;
+    padding: 7px;
+    border-radius: 6px;
+    font-size: 12px;
+    background-color: #f5f5dc;
+    color: #4d4d4d;
+    border: 1px solid #dcdcc6;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#logo-copy h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #4d4d4d;
+    font-size: 75px;
+}
+
+#logo-copy p {
+    text-align: center;
+    color: #4d4d4d;
+}
+
+#dialog {
+    background-color: crimson;
+    display: none;
     color: #ffffff;
 }
 
@@ -37,18 +87,19 @@ body {
   color: #ffffff;
 }
 
+.row {
+    margin-top: 10px;
+}
+
 .btn {
-    float: left;
-    margin: 8px;
-    display: block;
+    display: inline-block;
 }
 
 #card-input-field {
     color: #ffffff;
-    float:left;
 }
 
-.board {
+.board-design {
     text-align: center;
     color: white;
     background-color: crimson;
@@ -58,8 +109,11 @@ body {
     margin: 12px;
     font-size: 20px;
     min-width: 170px;
+    display: inline-block;
+}
+
+.board {
     cursor: pointer;
-    float: left;
 }
 
 .card {
@@ -73,10 +127,10 @@ body {
     font-size: 20px;
     min-width: 170px;
     cursor: pointer;
-    float: left;
+
 }
 
-.card-intro {
+.card-intros {
     text-align: center;
     color: white;
     background-color: crimson;
@@ -87,7 +141,7 @@ body {
     font-size: 20px;
     min-width: 170px;
     cursor: pointer;
-    float: left;
+
 }
 
 .board-input {
@@ -97,30 +151,89 @@ body {
     padding: 12px;
     border: 1px solid red;
     border-radius: 6px;
-    margin: 12px;
     font-size: 20px;
     min-width: 150px;
     cursor: pointer;
-    float: left;
+    box-sizing: border-box;
+    margin-top: 10px;
+
 }
 
 input {
-    color: #000000;
+    color: #ffffff;
     border: none;
     border-radius: 6px;
     background-color: #dc143c;
+}
+
+footer a {
+    color: #f2f2f2;
+}
+
+footer a:hover {
+    color: #f2f2f2;
 }
 
 input:focus {
     outline: none;
 }
 
-#new-board {
-    float: left;
+#cards-container div {
+    text-align: center;
+}
+
+#new {
+    min-height: 100vh;
+    background-color: #e3dac9;
+    padding-top: 10px;
+}
+
+#in-progress {
+    background-color: #EAD3A8;
+    min-height: 100vh;
+    padding-top: 10px;
+}
+
+#review {
+    color: #ffffff;
+    min-height: 100vh;
+    background-color: #6E6568;
+    padding-top: 10px;
+}
+
+#done {
+    color: #ffffff;
+    background-color: #484043;
+    min-height: 100vh;
+    padding-top: 10px;
+}
+
+.ui-dialog-titlebar {
+    background-image: none;
+    background-color: #f5f5dc;
+    color: #4d4d4d;
+}
+
+ui-dialog {
+    border: none;
+}
+
+.col-md-3 {
+    padding: 0px;
+}
+
+.panel {
+    display: none;
+    background-color: crimson;
+}
+
+.clog {
+    font-size: 19px;
+    cursor: pointer;
 }
 
 .boards {
-    float: left;
+
 }
 
 .card-input {
@@ -130,9 +243,7 @@ input:focus {
     padding: 12px;
     border: 1px solid red;
     border-radius: 6px;
-    margin: 12px;
     font-size: 20px;
-    display: inline-block;
     min-width: 150px;
     cursor: pointer;
 }
