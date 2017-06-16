@@ -3,9 +3,8 @@ function printBoards(dataObject) {
     // For to get boards.
     for (var i = 0; i < Object.keys(dataObject.boards).length; i++) {
         $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + i +
-        "'>"
-        + dataObject.boards[i].title + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i><div class='panel'>\
-                                        <button class='btn ok'>OK</button></div></div>");
+                                        "'>" + dataObject.boards[i].title + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i>\
+                                        <div class='panel'><button class='btn ok'>OK</button></div></div>");
     }
 }
 
@@ -67,7 +66,7 @@ function addBoard(dataObject) {
             $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" 
                                             + newObject.id + "'>" + newObject.title + 
                                             "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i></div>");
-        });
+    });
 }
 
 function addNewCard(dataObject) {
@@ -117,15 +116,15 @@ function clogSpin(dataObject) {
 
     $(document).on( 'click', ".clog", function(){
 
-    var boardId = $(this).prev().data("board-id");
-    $( "#dialog" ).data('board_id', boardId).dialog();
-    $("span.ui-dialog-title").text('Change board title');
-    $(".ui-dialog-titlebar-close").hide();
-    $( "#dialog" ).dialog( "option", "width", 250 );
-    $("#change-title").val("");
+        var boardId = $(this).prev().data("board-id");
+        $( "#dialog" ).data('board_id', boardId).dialog();
+        $("span.ui-dialog-title").text('Change board title');
+        $(".ui-dialog-titlebar-close").hide();
+        $( "#dialog" ).dialog( "option", "width", 250 );
+        $("#change-title").val("");
 
-    // Change title.
-    changeTitle(dataObject, boardId);
+        // Change title.
+        changeTitle(dataObject, boardId);
 
 
     });
@@ -146,6 +145,7 @@ function changeTitle(dataObject, boardId) {
 
 function cardDragger(dataObject) {
     $( function() {
+        
         $( "#new" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "new";
@@ -157,11 +157,13 @@ function cardDragger(dataObject) {
             var newStatus = "done";
             changeCardStatus(dataObject, event, ui, newStatus, boardId);
         }});
+        
         $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "in progress";
             changeCardStatus(dataObject, event, ui, newStatus, boardId);
         }});
+        
         $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "review";
