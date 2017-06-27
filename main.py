@@ -28,7 +28,8 @@ def add_new_card():
     card_board_id = request.form['board_id']
     database_handler("INSERT INTO cards (title, status, boards_id) VALUES \
                                         ('{0}', '{1}', '{2}');".format(card_title, card_status, card_board_id), 'write')
-    return "hello"
+    card_id = database_handler("SELECT id FROM cards ORDER BY id DESC LIMIT 1;")
+    return jsonify(data=card_id)
 
 
 @app.route("/change-board-title", methods=['POST'])

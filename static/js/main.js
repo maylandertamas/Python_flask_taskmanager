@@ -76,26 +76,14 @@ function addNewBoard() {
 
 
 function addNewCard() {
-
     $(document).on('click', '#add-card-button', function () {
         boardId = $(this).data("board-id");
+        cardTitle = $(this).prev().val();
         
-        $.ajax({
-            url: '/add-new-card',
-            data: {'title': $(this).prev().val(),
-                    'board_id': boardId},
-            type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
+        $.post("/add-new-card", {title: cardTitle, board_id: boardId}, function(data) {
+            $("#new").append("<div class='card actual-cards' data-card-id='" + data.data[0][0]
+                                                                    + "' >" + cardTitle + "</div>");
         });
-        /*dataObject.boards[boardId].cards.push(newObject);
-        $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
-        $("#card-input-field").val("");*/
-        
     });
 }
 
@@ -204,8 +192,6 @@ function main() {
     // Show the clicked board cards
     showCardPage();
 
-    // Add new card to board.
-   addNewCard();
     //cardDragger();
     // Add new card to board.
     addNewCard();
