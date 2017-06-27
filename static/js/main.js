@@ -173,7 +173,9 @@ function cardDragger(dataObject) {
 }
 
 function main() {
- 
+    $.get("/get-boards", function(data) {
+        console.log(data);
+    });
     // Read JSON to get initial data.
     setupJson();
 
