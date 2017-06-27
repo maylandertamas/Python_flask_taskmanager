@@ -129,7 +129,7 @@ function clogSpin(dataObject) {
 
     });
 
-};
+}
 
 function changeTitle(dataObject, boardId) {
     $(document).on('click', '#submit-new-title', function () {
@@ -169,7 +169,7 @@ function cardDragger(dataObject) {
             var newStatus = "review";
             changeCardStatus(dataObject, event, ui, newStatus, boardId);
         }});
-});
+    });
 }
 
 function main() {
