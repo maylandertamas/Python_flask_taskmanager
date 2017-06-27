@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.6
 -- Dumped by pg_dump version 9.5.6
 
--- Started on 2017-06-27 10:37:32 CEST
+-- Started on 2017-06-27 12:09:32 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -184,6 +184,8 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 COPY boards (id, title, user_id) FROM stdin;
+5	test1	1
+6	test2	1
 \.
 
 
@@ -193,7 +195,7 @@ COPY boards (id, title, user_id) FROM stdin;
 -- Name: boards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: maylandertamas
 --
 
-SELECT pg_catalog.setval('boards_id_seq', 1, false);
+SELECT pg_catalog.setval('boards_id_seq', 6, true);
 
 
 --
@@ -203,6 +205,8 @@ SELECT pg_catalog.setval('boards_id_seq', 1, false);
 --
 
 COPY cards (id, title, status, boards_id) FROM stdin;
+1	testcard	in-progress	5
+2	testcard2	done	6
 \.
 
 
@@ -212,7 +216,7 @@ COPY cards (id, title, status, boards_id) FROM stdin;
 -- Name: cards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: maylandertamas
 --
 
-SELECT pg_catalog.setval('cards_id_seq', 1, false);
+SELECT pg_catalog.setval('cards_id_seq', 2, true);
 
 
 --
@@ -222,6 +226,7 @@ SELECT pg_catalog.setval('cards_id_seq', 1, false);
 --
 
 COPY users (id, username, password) FROM stdin;
+1	user1	pass
 \.
 
 
@@ -231,7 +236,7 @@ COPY users (id, username, password) FROM stdin;
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: maylandertamas
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
@@ -291,7 +296,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2017-06-27 10:37:33 CEST
+-- Completed on 2017-06-27 12:09:32 CEST
 
 --
 -- PostgreSQL database dump complete

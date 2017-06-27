@@ -1,5 +1,6 @@
 function printBoards() {
 
+    // For to get boards.
     $.get("/get-boards", function(data) {
         $("#boards-container").empty();
         for (var i = 0; i < data.data.length; i++) {
@@ -8,15 +9,11 @@ function printBoards() {
                                             <div class='panel'><button class='btn ok'>OK</button></div></div>");
         };
     });
-    
+
 }
 
-function showCardPage(dataObject) {
+function showCardPage() {
     $(document).on("click" , ".board", function() {
-
-        // Export JSON.
-        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataObject));
-        $('footer').html('<a href="data:' + data + '" download="data.json">download JSON</a>')
 
         // Hide boards container and show cards container.
         $("#boards-container").css({"display": "none"});
@@ -26,28 +23,37 @@ function showCardPage(dataObject) {
 
         // Get board id from html data.
         boardId = $(this).data("board-id");
-        var boardTitle = dataObject.boards[boardId].title;
-        $('#cards-head').append('<h1 id="board-title">' + boardTitle + '</h1>');
-        $("#cards-head").append("<div class='card-input'><input id='card-input-field' type='text'\
-                                 placeholder='Create new card'><span id='add-card-button' data-board-id='" + boardId + "'> +</span></div>");
-        $("#cards-head").append("<button type='button' class='btn' id='back-button'>BACK</button>");
-
-        // Append cards to the proper container
-        for (var i = 0; i < Object.keys(dataObject.boards[boardId].cards).length; i++) {
-            switch (dataObject.boards[boardId].cards[i].status) {
-                case "in progress": $("#in-progress").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id
-                                                                + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
-                    break;
-                case "review": $("#review").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id
-                                                    + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
-                    break;
-                case "done": $("#done").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id
-                                                + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
-                    break;
-                default: $("#new").append("<div class='card actual-cards' data-card-id='" + dataObject.boards[boardId].cards[i].id
-                                            + "' >" + dataObject.boards[boardId].cards[i].title + "</div>");
+        
+        $.get("/get-boards", function(data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (data.data[i][0] === boardId) {
+                    var boardDataWithCards = data.data[i];
+                }
             }
-        }   
+            $('#cards-head').append('<h1 id="board-title">' + boardDataWithCards[1] + '</h1>');
+            $("#cards-head").append("<div class='card-input'><input id='card-input-field' type='text'\
+                                    placeholder='Create new card'><span id='add-card-button' data-board-id='" + boardId + "'> +</span></div>");
+            $("#cards-head").append("<button type='button' class='btn' id='back-button'>BACK</button>");
+            var cardsData = boardDataWithCards[3];
+            // Append cards to the proper container
+            for (var i = 0; i < cardsData.length; i++) {
+                switch (cardsData[i]) {
+                    case "in-progress": $("#in-progress").append("<div class='card actual-cards' data-card-id='" + cardsData[i][0]
+                                                                    + "' >" + cardsData[i][1] + "</div>");
+                        break;
+                    case "review": $("#review").append("<div class='card actual-cards' data-card-id='" + cardsData[i][0]
+                                                        + "' >" + cardsData[i][1] + "</div>");
+                        break;
+                    case "done": $("#done").append("<div class='card actual-cards' data-card-id='" + cardsData[i][0]
+                                                    + "' >" + cardsData[i][1] + "</div>");
+                        break;
+                    default: $("#new").append("<div class='card actual-cards' data-card-id='" + cardsData[i][0]
+                                                + "' >" + cardsData[i][1] + "</div>");
+                }
+            }   
+
+        });
+       
     });
 }
 
@@ -67,28 +73,32 @@ function addNewBoard() {
 }
 
 
-function addNewCard(dataObject) {
+function addNewCard() {
 
     $(document).on('click', '#add-card-button', function () {
         boardId = $(this).data("board-id");
-        var newCardTitle = $(this).prev().val();
-        var newCardId = cardIdGenerator(dataObject).toString();
         
-        var newObject =  {
-                "id": newCardId,
-                "title": newCardTitle,
-                "status": "new",
-                "order": cardOrderGenerator(dataObject, boardId).toString()
-        }
-
-        dataObject.boards[boardId].cards.push(newObject);
+        $.ajax({
+            url: '/add-new-card',
+            data: {'title': $(this).prev().val(),
+                    'board_id': 8},
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        /*dataObject.boards[boardId].cards.push(newObject);
         $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
-        $("#card-input-field").val("");
+        $("#card-input-field").val("");*/
+        
     });
 }
 
 
-function backToBoardPage(dataObject) {
+function backToBoardPage() {
     $(document).on('click', '#back-button', function() {
         $("#cards-container").css({"display": "none"});
         $("#cards-head").css({"display": "none"});
@@ -101,7 +111,7 @@ function backToBoardPage(dataObject) {
     });
 }
 
-function clogSpin(dataObject) {
+function clogSpin() {
 
     $(document).on({
         mouseenter: function () {
@@ -122,22 +132,27 @@ function clogSpin(dataObject) {
         $("#change-title").val("");
 
         // Change title.
-        changeTitle(dataObject, boardId);
+        changeTitle(boardId);
 
 
     });
 
 }
 
-function changeTitle(dataObject, boardId) {
+function changeTitle(boardId) {
     $(document).on('click', '#submit-new-title', function () {
 
         var boardIdChange = $("#dialog").data('board_id')
-        dataObject.boards[boardIdChange].title = $("#change-title").val();
+        var newBoardTitle = $("#change-title").val();
+        $.ajax({
+            url: "/change-board-title",
+            data: {'title': newBoardTitle, 'boardId': boardId},
+            type: 'POST'
+        })
         $( "#dialog" ).dialog( "close" );
 
         $("#boards-container").empty();
-        return printBoards(dataObject);
+        return printBoards();
     });
 }
 
@@ -186,19 +201,21 @@ function main() {
 
     /*
     // Show the clicked board cards
-    showCardPage(dataObject);
+    showCardPage();
 
-    cardDragger(dataObject);
+    // cardDragger(dataObject);
 
     // Add new card to board.
-    addNewCard(dataObject);
+   // addNewCard(dataObject);
+    cardDragger(dataObject);
+    // Add new card to board.
+    addNewCard();
 
     // Back to the boards page.
-    backToBoardPage(dataObject);
+    backToBoardPage();
 
     // Clog spin.
-    clogSpin(dataObject);
-    */
+    clogSpin();
 }
 
 $(document).ready(main);

@@ -19,7 +19,27 @@ def get_boards():
         card_data = database_handler("SELECT * FROM cards WHERE boards_id = {0};".format(x))
         element.append(card_data)
     return jsonify(data=list_board_data)
+ 
 
+@app.route("/add-new-card", methods=["POST"])
+def add_new_card():
+    card_title = request.form['title']
+    card_status = "new"
+    card_board_id = request.form['board_id']
+    database_handler("INSERT INTO cards (title, status, boards_id) VALUES \
+                                        ('{0}', '{1}', '{2}');".format(card_title, card_status, card_board_id), 'write')
+    return "hello"
+
+
+@app.route("/change-board-title", methods=['POST'])
+def change_board_title():
+    new_board_title = request.form['title']
+    actual_board_id = request.form['boardId']
+    database_handler("UPDATE boards\
+                    SET title = '{0}'\
+                    WHERE id={1};".format(new_board_title, actual_board_id), "write")
+    
+    return None
 
 @app.route("/new-board", methods=["POST"])
 def new_board():
@@ -30,6 +50,3 @@ def new_board():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-print(get_boards())
