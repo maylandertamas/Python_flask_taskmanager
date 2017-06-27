@@ -21,6 +21,13 @@ def get_boards():
     return jsonify(data=list_board_data)
 
 
+@app.route("/new-board", methods=["POST"])
+def new_board():
+    new_board_name = request.form["title"]
+    database_handler("INSERT INTO boards (title, user_id) VALUES ('{0}', 1);".format(new_board_name), "write")
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

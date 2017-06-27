@@ -1,13 +1,13 @@
 function printBoards() {
 
     $.get("/get-boards", function(data) {
+        $("#boards-container").empty();
         for (var i = 0; i < data.data.length; i++) {
             $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + data.data[i][0] +
                                             "'>" + data.data[i][1] + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i>\
                                             <div class='panel'><button class='btn ok'>OK</button></div></div>");
         };
     });
-    // For to get boards.
     
 }
 
@@ -51,26 +51,21 @@ function showCardPage(dataObject) {
     });
 }
 
-function addBoard(dataObject) {
-     $('#add-board-button').click(function() {
+function addNewBoard() {
+        $('#add-board-button').click(function() {
 
             // Get the new board title from impu.
             newBoardTitle = $(this).prev().val();
-
-            var newObject =  {
-                "id": Object.keys(dataObject.boards).length,
-                "title": newBoardTitle,
-                "state": "active",
-                "cards": []
-            }
-
-            dataObject.boards.push(newObject);
             
-            $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" 
-                                            + newObject.id + "'>" + newObject.title + 
-                                            "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i></div>");
+            $.ajax({
+                url: '/new-board',
+                data: {'title': $(this).prev().val()},
+                type: 'POST',
+            });
+        printBoards();
     });
 }
+
 
 function addNewCard(dataObject) {
 
@@ -175,6 +170,8 @@ function cardDragger(dataObject) {
     });
 }
 
+
+
 function main() {
    
 
@@ -183,10 +180,11 @@ function main() {
 
     // Print boards.
     printBoards();
-    /*
+    
     // Add create new board field.    
-    addBoard(dataObject);
+    addNewBoard()
 
+    /*
     // Show the clicked board cards
     showCardPage(dataObject);
 
