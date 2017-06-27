@@ -19,6 +19,16 @@ def get_boards():
         card_data = database_handler("SELECT * FROM cards WHERE boards_id = {0};".format(x))
         element.append(card_data)
     return jsonify(data=list_board_data)
+ 
+
+@app.route("/add-new-card", methods=["POST"])
+def add_new_card():
+    card_title = request.form['title']
+    card_status = "new"
+    card_board_id = request.form['board_id']
+    database_handler("INSERT INTO cards (title, status, boards_id) VALUES \
+                                        ('{0}', '{1}', '{2}');".format(card_title, card_status, card_board_id), 'write')
+    return "hello"
 
 
 if __name__ == '__main__':

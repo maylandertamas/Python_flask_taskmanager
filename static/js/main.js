@@ -1,5 +1,4 @@
 function printBoards() {
-
     $.get("/get-boards", function(data) {
         for (var i = 0; i < data.data.length; i++) {
             $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + data.data[i][0] +
@@ -72,23 +71,27 @@ function addBoard(dataObject) {
     });
 }
 
-function addNewCard(dataObject) {
+function addNewCard() {
 
     $(document).on('click', '#add-card-button', function () {
         boardId = $(this).data("board-id");
-        var newCardTitle = $(this).prev().val();
-        var newCardId = cardIdGenerator(dataObject).toString();
         
-        var newObject =  {
-                "id": newCardId,
-                "title": newCardTitle,
-                "status": "new",
-                "order": cardOrderGenerator(dataObject, boardId).toString()
-        }
-
-        dataObject.boards[boardId].cards.push(newObject);
+        $.ajax({
+            url: '/add-new-card',
+            data: {'title': $(this).prev().val(),
+                    'board_id': 8},
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        /*dataObject.boards[boardId].cards.push(newObject);
         $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
-        $("#card-input-field").val("");
+        $("#card-input-field").val("");*/
+        
     });
 }
 
@@ -191,9 +194,9 @@ function main() {
     showCardPage(dataObject);
 
     cardDragger(dataObject);
-
+*/
     // Add new card to board.
-    addNewCard(dataObject);
+    addNewCard();/*
 
     // Back to the boards page.
     backToBoardPage(dataObject);
