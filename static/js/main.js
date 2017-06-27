@@ -1,11 +1,14 @@
-function printBoards(dataObject) {
+function printBoards() {
 
+    $.get("/get-boards", function(data) {
+        for (var i = 0; i < data.data.length; i++) {
+            $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + data.data[i][0] +
+                                            "'>" + data.data[i][1] + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i>\
+                                            <div class='panel'><button class='btn ok'>OK</button></div></div>");
+        };
+    });
     // For to get boards.
-    for (var i = 0; i < Object.keys(dataObject.boards).length; i++) {
-        $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + i +
-                                        "'>" + dataObject.boards[i].title + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i>\
-                                        <div class='panel'><button class='btn ok'>OK</button></div></div>");
-    }
+    
 }
 
 function showCardPage(dataObject) {
@@ -173,19 +176,14 @@ function cardDragger(dataObject) {
 }
 
 function main() {
-    $.get("/get-boards", function(data) {
-        console.log(data);
-    });
-    // Read JSON to get initial data.
-    setupJson();
+   
 
     // Create an object from local storage string.
-    var dataObject = readFromJson();
     var boardId;
 
     // Print boards.
-    printBoards(dataObject);
-
+    printBoards();
+    /*
     // Add create new board field.    
     addBoard(dataObject);
 
@@ -201,7 +199,8 @@ function main() {
     backToBoardPage(dataObject);
 
     // Clog spin.
-    clogSpin(dataObject);   
+    clogSpin(dataObject);
+    */
 }
 
 $(document).ready(main);
