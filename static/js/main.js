@@ -37,7 +37,7 @@ function showCardPage() {
             var cardsData = boardDataWithCards[3];
             // Append cards to the proper container
             for (var i = 0; i < cardsData.length; i++) {
-                switch (cardsData[i]) {
+                switch (cardsData[i][2]) {
                     case "in-progress": $("#in-progress").append("<div class='card actual-cards' data-card-id='" + cardsData[i][0]
                                                                     + "' >" + cardsData[i][1] + "</div>");
                         break;
@@ -199,15 +199,13 @@ function main() {
     // Add create new board field.    
     addNewBoard()
 
-    /*
+    
     // Show the clicked board cards
     showCardPage();
 
-    // cardDragger(dataObject);
-
     // Add new card to board.
-   // addNewCard(dataObject);
-    cardDragger(dataObject);
+   addNewCard();
+    //cardDragger();
     // Add new card to board.
     addNewCard();
 
