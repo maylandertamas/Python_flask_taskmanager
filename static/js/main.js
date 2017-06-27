@@ -81,7 +81,7 @@ function addNewCard() {
         $.ajax({
             url: '/add-new-card',
             data: {'title': $(this).prev().val(),
-                    'board_id': 8},
+                    'board_id': boardId},
             type: 'POST',
             success: function(response) {
                 console.log(response);
