@@ -35,7 +35,6 @@ function showCardPage() {
             $("#cards-head").append("<button type='button' class='btn' id='back-button'>BACK</button>");
             var cardsData = boardDataWithCards[3];
             // Append cards to the proper container
-            console.log(cardsData)
             for (var i = 0; i < cardsData.length; i++) {
                 switch (cardsData[i]) {
                     case "in-progress": $("#in-progress").append("<div class='card actual-cards' data-card-id='" + cardsData[i][0]
@@ -99,7 +98,7 @@ function addNewCard(dataObject) {
 }
 
 
-function backToBoardPage(dataObject) {
+function backToBoardPage() {
     $(document).on('click', '#back-button', function() {
         $("#cards-container").css({"display": "none"});
         $("#cards-head").css({"display": "none"});
@@ -112,7 +111,7 @@ function backToBoardPage(dataObject) {
     });
 }
 
-function clogSpin(dataObject) {
+function clogSpin() {
 
     $(document).on({
         mouseenter: function () {
@@ -133,22 +132,27 @@ function clogSpin(dataObject) {
         $("#change-title").val("");
 
         // Change title.
-        changeTitle(dataObject, boardId);
+        changeTitle(boardId);
 
 
     });
 
 }
 
-function changeTitle(dataObject, boardId) {
+function changeTitle(boardId) {
     $(document).on('click', '#submit-new-title', function () {
 
         var boardIdChange = $("#dialog").data('board_id')
-        dataObject.boards[boardIdChange].title = $("#change-title").val();
+        var newBoardTitle = $("#change-title").val();
+        $.ajax({
+            url: "/change-board-title",
+            data: {'title': newBoardTitle, 'boardId': boardId},
+            type: 'POST'
+        })
         $( "#dialog" ).dialog( "close" );
 
         $("#boards-container").empty();
-        return printBoards(dataObject);
+        return printBoards();
     });
 }
 
@@ -202,10 +206,10 @@ function main() {
    // addNewCard(dataObject);
 
     // Back to the boards page.
-    //backToBoardPage(dataObject);
+    backToBoardPage();
 
     // Clog spin.
-    //clogSpin(dataObject);
+    clogSpin();
 }
 
 $(document).ready(main);

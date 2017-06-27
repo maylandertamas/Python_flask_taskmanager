@@ -21,8 +21,15 @@ def get_boards():
     return jsonify(data=list_board_data)
 
 
+@app.route("/change-board-title", methods=['POST'])
+def change_board_title():
+    new_board_title = request.form['title']
+    actual_board_id = request.form['boardId']
+    database_handler("UPDATE boards\
+                    SET title = '{0}'\
+                    WHERE id={1};".format(new_board_title, actual_board_id), "write")
+    
+    return None
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-print(get_boards())
