@@ -1,5 +1,7 @@
 function printBoards() {
 
+    $("#boards-container").empty();
+
     // For to get boards.
     $.get("/get-boards", function(data) {
         $("#boards-container").empty();
@@ -191,15 +193,14 @@ function main() {
    
 
     // Create an object from local storage string.
-    var boardId;
+    // var boardId;
 
     // Print boards.
     printBoards();
     
     // Add create new board field.    
-    addNewBoard()
+    addNewBoard();
 
-    
     // Show the clicked board cards
     showCardPage();
 
