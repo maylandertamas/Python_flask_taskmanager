@@ -1,5 +1,5 @@
 function printBoards() {
-
+    $("#boards-container").empty();
     // For to get boards.
     $.get("/get-boards", function(data) {
         $("#boards-container").empty();
