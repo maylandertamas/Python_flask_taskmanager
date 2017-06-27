@@ -1,4 +1,5 @@
 function printBoards() {
+
     // For to get boards.
     $.get("/get-boards", function(data) {
         for (var i = 0; i < data.data.length; i++) {
@@ -77,23 +78,27 @@ function addBoard(dataObject) {
     });
 }
 
-function addNewCard(dataObject) {
+function addNewCard() {
 
     $(document).on('click', '#add-card-button', function () {
         boardId = $(this).data("board-id");
-        var newCardTitle = $(this).prev().val();
-        var newCardId = cardIdGenerator(dataObject).toString();
         
-        var newObject =  {
-                "id": newCardId,
-                "title": newCardTitle,
-                "status": "new",
-                "order": cardOrderGenerator(dataObject, boardId).toString()
-        }
-
-        dataObject.boards[boardId].cards.push(newObject);
+        $.ajax({
+            url: '/add-new-card',
+            data: {'title': $(this).prev().val(),
+                    'board_id': 8},
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        /*dataObject.boards[boardId].cards.push(newObject);
         $("#new").append("<div class='card actual-cards' data-card-id='" + newCardId + "' >" + newCardTitle + "</div>");
-        $("#card-input-field").val("");
+        $("#card-input-field").val("");*/
+        
     });
 }
 
@@ -204,6 +209,9 @@ function main() {
 
     // Add new card to board.
    // addNewCard(dataObject);
+    cardDragger(dataObject);
+    // Add new card to board.
+    addNewCard();
 
     // Back to the boards page.
     backToBoardPage();
