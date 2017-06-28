@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.6
 -- Dumped by pg_dump version 9.5.6
 
--- Started on 2017-06-27 12:09:32 CEST
+-- Started on 2017-06-28 14:52:09 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,7 +24,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2170 (class 0 OID 0)
+-- TOC entry 2172 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -68,7 +68,7 @@ CREATE SEQUENCE boards_id_seq
 ALTER TABLE boards_id_seq OWNER TO maylandertamas;
 
 --
--- TOC entry 2171 (class 0 OID 0)
+-- TOC entry 2173 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: boards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: maylandertamas
 --
@@ -107,7 +107,7 @@ CREATE SEQUENCE cards_id_seq
 ALTER TABLE cards_id_seq OWNER TO maylandertamas;
 
 --
--- TOC entry 2172 (class 0 OID 0)
+-- TOC entry 2174 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: cards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: maylandertamas
 --
@@ -145,7 +145,7 @@ CREATE SEQUENCE users_id_seq
 ALTER TABLE users_id_seq OWNER TO maylandertamas;
 
 --
--- TOC entry 2173 (class 0 OID 0)
+-- TOC entry 2175 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: maylandertamas
 --
@@ -178,69 +178,84 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- TOC entry 2160 (class 0 OID 17468)
+-- TOC entry 2162 (class 0 OID 17468)
 -- Dependencies: 184
 -- Data for Name: boards; Type: TABLE DATA; Schema: public; Owner: maylandertamas
 --
 
 COPY boards (id, title, user_id) FROM stdin;
-5	test1	1
-6	test2	1
+6	test	1
+9	egy	1
+7	ketto	1
+5	harom	1
+8	negy	1
+10	petiboardja	5
+11	petikisbordja	6
 \.
 
 
 --
--- TOC entry 2174 (class 0 OID 0)
+-- TOC entry 2176 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: boards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: maylandertamas
 --
 
-SELECT pg_catalog.setval('boards_id_seq', 6, true);
+SELECT pg_catalog.setval('boards_id_seq', 11, true);
 
 
 --
--- TOC entry 2162 (class 0 OID 17481)
+-- TOC entry 2164 (class 0 OID 17481)
 -- Dependencies: 186
 -- Data for Name: cards; Type: TABLE DATA; Schema: public; Owner: maylandertamas
 --
 
 COPY cards (id, title, status, boards_id) FROM stdin;
 1	testcard	in-progress	5
-2	testcard2	done	6
+15	asd	done	6
+2	testcard2	new	6
+16	uhj	in-progress	6
+17	negyesnek uj kard	done	8
+19	peticipicikartyaja	new	11
+18	petikartyaja	done	10
 \.
 
 
 --
--- TOC entry 2175 (class 0 OID 0)
+-- TOC entry 2177 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: cards_id_seq; Type: SEQUENCE SET; Schema: public; Owner: maylandertamas
 --
 
-SELECT pg_catalog.setval('cards_id_seq', 2, true);
+SELECT pg_catalog.setval('cards_id_seq', 19, true);
 
 
 --
--- TOC entry 2158 (class 0 OID 17423)
+-- TOC entry 2160 (class 0 OID 17423)
 -- Dependencies: 182
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: maylandertamas
 --
 
 COPY users (id, username, password) FROM stdin;
 1	user1	pass
+3	peti	pbkdf2:sha224:50000$2$24e045f2ba4fb2e259232340c4e06527ce58454c3c1abb6895dbfd73
+4	asda	pbkdf2:sha224:50000$8$8fd563056713429566349604fae5e3eab4dde5147a7cdc4cae5984c1
+5	petiszomoru	pbkdf2:sha224:50000$y$995761eab21cb27d05aac15690bf8c2608bdbad40d98ea3dcfa5e7c4
+6	petiboldog	pbkdf2:sha224:50000$I$8ae4ed0dc63f45b4dcef6afb5ddd2b14bb79ba24a8f74f2d24c4bfb9
+7	petinincs	pbkdf2:sha224:50000$5$8a3c929581c7db9cfc8cffd5a9d583c56b3aa48c314f6183b29fa883
 \.
 
 
 --
--- TOC entry 2176 (class 0 OID 0)
+-- TOC entry 2178 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: maylandertamas
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, true);
+SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
--- TOC entry 2038 (class 2606 OID 17473)
+-- TOC entry 2040 (class 2606 OID 17473)
 -- Name: boards_pkey; Type: CONSTRAINT; Schema: public; Owner: maylandertamas
 --
 
@@ -249,7 +264,7 @@ ALTER TABLE ONLY boards
 
 
 --
--- TOC entry 2040 (class 2606 OID 17486)
+-- TOC entry 2042 (class 2606 OID 17486)
 -- Name: cards_pkey; Type: CONSTRAINT; Schema: public; Owner: maylandertamas
 --
 
@@ -267,7 +282,16 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2041 (class 2606 OID 17474)
+-- TOC entry 2038 (class 2606 OID 17493)
+-- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: maylandertamas
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
+
+
+--
+-- TOC entry 2043 (class 2606 OID 17474)
 -- Name: boards_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: maylandertamas
 --
 
@@ -276,7 +300,7 @@ ALTER TABLE ONLY boards
 
 
 --
--- TOC entry 2042 (class 2606 OID 17487)
+-- TOC entry 2044 (class 2606 OID 17487)
 -- Name: cards_boards_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: maylandertamas
 --
 
@@ -285,7 +309,7 @@ ALTER TABLE ONLY cards
 
 
 --
--- TOC entry 2169 (class 0 OID 0)
+-- TOC entry 2171 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -296,7 +320,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2017-06-27 12:09:32 CEST
+-- Completed on 2017-06-28 14:52:10 CEST
 
 --
 -- PostgreSQL database dump complete
