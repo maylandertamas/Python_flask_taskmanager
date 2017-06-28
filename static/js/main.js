@@ -175,6 +175,20 @@ function cardDragger() {
     });
 }
 
+function loginAndRegistration() {
+    $('#loginModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var buttonData = button.attr('id');
+    if (buttonData == 'registration') {
+        $("#login-modal").hide();
+        $("#registration-modal").show();
+    } else if (buttonData == 'login') {
+        $("#login-modal").show();
+        $("#registration-modal").hide();
+    }
+});
+}
+
 
 
 function main() {
@@ -201,6 +215,7 @@ function main() {
 
     // Clog spin.
     clogSpin();
+    loginAndRegistration();
 }
 
 $(document).ready(main);

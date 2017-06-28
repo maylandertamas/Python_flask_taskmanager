@@ -6,13 +6,20 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def index():
-    return render_template("index.html")
+def index(username=None, userid=None):
+    if 'username' in session and 'userid' in session:
+        username = session['username']
+        userid = session['userid']
+    else:
+        username = None
+        userid = None
+    return render_template("index.html", username=username, userid=userid)
 
 
 @app.route("/get-boards")
 def get_boards():
-    board_data = database_handler("SELECT * FROM boards;")
+    board_data = database_handler("SELECT * FROM boards\
+                                    WHERE user_id={0};".format(session['userid']))
     list_board_data = [list(element) for element in board_data]
     for element in list_board_data:
         x = element[0]
@@ -40,13 +47,13 @@ def change_board_title():
                     SET title = '{0}'\
                     WHERE id={1};".format(new_board_title, actual_board_id), "write")
 
-    return None
+    return "ok"
 
 
 @app.route("/new-board", methods=["POST"])
 def new_board():
     new_board_name = request.form["title"]
-    database_handler("INSERT INTO boards (title, user_id) VALUES ('{0}', 1);".format(new_board_name), "write")
+    database_handler("INSERT INTO boards (title, user_id) VALUES ('{0}', {1});".format(new_board_name, session['userid']), "write")
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
@@ -60,6 +67,50 @@ def change_chard_status():
     return "ok"
 
 
+@app.route("/registration", methods=["POST"])
+def registration():
+    username = request.form['username']
+    password = request.form['password']
+    hashed_password = generate_password_hash(password, "pbkdf2:sha224", 1)
+
+    write_to_database = database_handler("INSERT INTO users (username, password)\
+                    VALUES ($${0}$$, $${1}$$);".format(username, hashed_password), "write")
+
+    if write_to_database == "error":
+        return '<a href="/"><button href= class="btn btn-default">Back</button></a><p>Username already exists</p>'
+
+    return redirect(url_for('index'))
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+    user_db_data = database_handler("SELECT username, password, id FROM users\
+                        WHERE username='{0}';".format(username))
+    try:
+        username_from_db = user_db_data[0][0]
+    except IndexError:
+        return '<a href="/"><button href= class="btn btn-default">Back</button></a><p>Username not found<p>' 
+    else:
+        user_pw_from_db = user_db_data[0][1]
+        remove_white_spaces_from_pw = user_pw_from_db.strip()
+        password_check = check_password_hash(remove_white_spaces_from_pw, password)
+        if password_check:
+            session['username'] = username_from_db
+            session['userid'] = user_db_data[0][2]
+        else:
+            return '<a href="/"><button href= class="btn btn-default">Back</button></a><p>Invalid password<p>'
+
+    return redirect(url_for('index'))
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
+    app.secret_key = '14389r2zf897uihn2uo3ht/%WTE)qwőq'
     app.run(debug=True)
