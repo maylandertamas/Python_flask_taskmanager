@@ -18,14 +18,17 @@ def index(username=None, userid=None):
 
 @app.route("/get-boards")
 def get_boards():
-    board_data = database_handler("SELECT * FROM boards\
-                                    WHERE user_id={0};".format(session['userid']))
-    list_board_data = [list(element) for element in board_data]
-    for element in list_board_data:
-        x = element[0]
-        card_data = database_handler("SELECT * FROM cards WHERE boards_id = {0};".format(x))
-        element.append(card_data)
-    return jsonify(data=list_board_data)
+    if 'userid' in session:
+        board_data = database_handler("SELECT * FROM boards\
+                                        WHERE user_id={0};".format(session['userid']))
+        list_board_data = [list(element) for element in board_data]
+        for element in list_board_data:
+            x = element[0]
+            card_data = database_handler("SELECT * FROM cards WHERE boards_id = {0};".format(x))
+            element.append(card_data)
+        return jsonify(data=list_board_data)
+    else:
+        return ""
  
 
 @app.route("/add-new-card", methods=["POST"])
@@ -108,6 +111,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
+    session.pop('userid', None)
     return redirect(url_for('index'))
 
 

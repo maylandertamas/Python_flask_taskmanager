@@ -4,12 +4,14 @@ function printBoards() {
 
     // For to get boards.
     $.get("/get-boards", function(data) {
+        if (data !== "") {
         $("#boards-container").empty();
         for (var i = 0; i < data.data.length; i++) {
             $("#boards-container").append("<div class='board-design'><span class='board' data-board-id='" + data.data[i][0] +
                                             "'>" + data.data[i][1] + "</span> <i class='fa fa-cog fa-3x fa-fw clog'></i>\
                                             <div class='panel'><button class='btn ok'>OK</button></div></div>");
-        };
+        }
+        }
     });
 
 }
