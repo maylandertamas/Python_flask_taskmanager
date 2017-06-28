@@ -50,5 +50,16 @@ def new_board():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
+@app.route("/change-card-status", methods=["POST"])
+def change_chard_status():
+    card_id = request.form["cardId"]
+    new_status = request.form["status"]
+    database_handler("UPDATE cards\
+                    SET status = '{0}'\
+                    WHERE id={1};".format(new_status, card_id), "write")
+    return "ok"
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

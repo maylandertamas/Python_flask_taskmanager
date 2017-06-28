@@ -146,31 +146,31 @@ function changeTitle(boardId) {
     });
 }
 
-function cardDragger(dataObject) {
+function cardDragger() {
     $( function() {
         
         $( "#new" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "new";
-            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+            changeCardStatus(ui, newStatus);
         }});
 
         $( "#done" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "done";
-            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+            changeCardStatus(ui, newStatus);
         }});
         
         $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
-            var newStatus = "in progress";
-            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+            var newStatus = "in-progress";
+            changeCardStatus(ui, newStatus);
         }});
         
         $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "review";
-            changeCardStatus(dataObject, event, ui, newStatus, boardId);
+            changeCardStatus(ui, newStatus);
         }});
     });
 }
@@ -192,7 +192,7 @@ function main() {
     // Show the clicked board cards
     showCardPage();
 
-    //cardDragger();
+    cardDragger();
     // Add new card to board.
     addNewCard();
 

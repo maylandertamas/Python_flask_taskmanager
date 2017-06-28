@@ -19,13 +19,12 @@ function cardOrderGenerator(dataObject, boardId) {
     return Math.max.apply(Math, cardOrderArray) + 1;
 }
 
-function changeCardStatus(dataObject, event, ui, newStatus, boardId) {
+function changeCardStatus(ui, newStatus) {
     var draggedObject = ui.item[0];
-            var cardId = $(draggedObject).data("cardId");
-
-            for (i = 0; i < dataObject.boards[boardId].cards.length; i++) {
-                if (dataObject.boards[boardId].cards[i].id == cardId) {
-                    dataObject.boards[boardId].cards[i].status = newStatus;
-                }
-            }
+    var cardId = $(draggedObject).data("cardId");
+    $.ajax({
+            url: "/change-card-status",
+            data: {'cardId': cardId, 'status': newStatus},
+            type: 'POST'
+        });
 }
