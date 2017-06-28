@@ -39,8 +39,9 @@ def change_board_title():
     database_handler("UPDATE boards\
                     SET title = '{0}'\
                     WHERE id={1};".format(new_board_title, actual_board_id), "write")
-    
+
     return None
+
 
 @app.route("/new-board", methods=["POST"])
 def new_board():

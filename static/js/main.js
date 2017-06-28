@@ -130,7 +130,7 @@ function clogSpin() {
 }
 
 function changeTitle(boardId) {
-    $(document).on('click', '#submit-new-title', function () {
+    $("#submit-new-title").unbind().click(function() {
 
         var boardIdChange = $("#dialog").data('board_id')
         var newBoardTitle = $("#change-title").val();
