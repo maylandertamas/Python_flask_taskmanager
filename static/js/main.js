@@ -208,36 +208,21 @@ function loginAndRegistration() {
 });
 }
 
-function mrCat() {
-    $('#help-mr-cat').click(function(){
-        $('#help-mr-cat').fadeOut();
-        $('#mr-cat').show();
-        $('#mr-cat').animate({left: "+=1000"}, 3000, function(){
-            $('#mr-cat-msg1').fadeIn();
-            $('#thx-cat').fadeIn();
+function dract() {
+    $('#dract').click(function(){
+        $('#mr-dract').animate({left: "+=300"}, 2000, function(){
+            $('#mr-dract').addClass('flipped');
+            $('#mr-dract').animate({left: "-=1"}, 500, function(){
+                $('#mr-dract').removeClass('flipped');
+                $('#mr-dract').animate({left: "-=299"}, 2000);
+            });    
         });
     });
 }
-
-function mrCatAway() {
-    $('#thx-cat-btn').click(function(){
-        $('#mr-cat-msg1').fadeOut();
-        $('#mr-cat-msg2').fadeIn(function(){
-            $('#mr-cat-msg2').fadeOut();
-            $('#mr-cat').animate({left: "-=1000"}, 3000);
-            $('#thx-cat').fadeOut();
-        });
-    });
-}
-
 
 
 function main() {
    
-
-    // Create an object from local storage string.
-    // var boardId;
-
     // Print boards.
     printBoards();
     
@@ -257,8 +242,7 @@ function main() {
     // Clog spin.
     clogSpin();
     loginAndRegistration();
-    mrCat();
-    mrCatAway();
+    dract();
 }
 
 $(document).ready(main);

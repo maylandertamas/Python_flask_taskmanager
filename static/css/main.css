@@ -40,6 +40,37 @@ h2 {
     padding: 10px;
 }
 
+#plain {
+    text-align: center;
+}
+
+#dract {
+    position:absolute;
+    top:10px;
+    left: 500px;
+    border:none;
+    background-color: #0d0d0d;
+    color: #0d0d0d;
+}
+#dract:hover {
+    color: #4d4d4d;
+}
+
+#mr-dract {
+    position: absolute;
+    left: -450px;
+    top: 150px;
+}
+
+.flipped {
+    transform: scale(1, -1);
+    -moz-transform: scale(1, -1);
+    -webkit-transform: scale(1, -1);
+    -o-transform: scale(1, -1);
+    -khtml-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+}
+
 #prog-container {
     display: none;
 }
