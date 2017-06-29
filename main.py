@@ -6,6 +6,8 @@ import json
 
 app = Flask(__name__)
 
+app.secret_key = 'abcd1234'
+
 
 @app.route("/")
 def index(username=None, userid=None):
@@ -77,7 +79,7 @@ def registration():
     username = request.form['username']
     password = request.form['password']
     hashed_password = generate_password_hash(password, "pbkdf2:sha224", 1)
-
+    print("registration in work")
     write_to_database = database_handler("INSERT INTO users (username, password)\
                     VALUES ($${0}$$, $${1}$$);".format(username, hashed_password), "write")
 
@@ -117,6 +119,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    print("main starts runnin")
-    app.secret_key = '14389r2zf897uihn2uo3ht/%WTE)qwőq'
+    
+
     app.run(debug=True)

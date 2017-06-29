@@ -169,36 +169,39 @@ function cardDragger() {
         update: function(event, ui) {
             var newStatus = "new";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
 
         $( "#done" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "done";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
         
         $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "in-progress";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
         
         $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "review";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
     });
 }
 
 function loginAndRegistration() {
     $('#loginModal').on('show.bs.modal', function (event) {
+        console.log("login/reg button pressed");
     var button = $(event.relatedTarget);
     var buttonData = button.attr('id');
     if (buttonData == 'registration') {
+        console.log("registerbutton");
         $("#login-modal").hide();
         $("#registration-modal").show();
     } else if (buttonData == 'login') {
+        console.log("loginshit");
         $("#login-modal").show();
         $("#registration-modal").hide();
     }
