@@ -118,5 +118,5 @@ def logout():
 
 if __name__ == '__main__':
     print("main starts runnin")
-    app.secret_key = '14389r2zf897uihn2uo3ht/%WTE)qwőq'
+    #app.secret_key = '14389r2zf897uihn2uo3ht/%WTE)qwőq'
     app.run(debug=True)
