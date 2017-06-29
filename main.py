@@ -118,5 +118,8 @@ def logout():
 
 if __name__ == '__main__':
     app.secret_key = 'abcd1234'
+    app.config['SESSION_TYPE'] = 'filesystem'
+
+    sess.init_app(app)
 
     app.run(debug=True)
