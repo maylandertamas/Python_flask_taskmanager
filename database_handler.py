@@ -15,7 +15,9 @@ connection = psycopg2.connect(
 
 
 def connect_to_database():
+    print("trying to connect db")
     try:
+        print("successfully connected")
         conn = psycopg2.connect("dbname='proman' user=''")
     except psycopg2.Error as error:
         print("Couldn't connect to database")
