@@ -1,6 +1,19 @@
 from flask import Flask, render_template, session, redirect, url_for, request, Response, jsonify
 from database_handler import database_handler
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+import psycopg2
+import urllib
+
+urllib.parse.uses_netloc.append('postgres')
+url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+connection = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
 
 app = Flask(__name__)
 
@@ -37,7 +50,7 @@ def add_new_card():
     card_status = "new"
     card_board_id = request.form['board_id']
     database_handler("INSERT INTO cards (title, status, boards_id) VALUES \
-                                        ('{0}', '{1}', '{2}');".format(card_title, card_status, card_board_id), 'write')
+                                        ('{0}', '{1}', {2});".format(card_title, card_status, card_board_id), 'write')
     card_id = database_handler("SELECT id FROM cards ORDER BY id DESC LIMIT 1;")
     return jsonify(data=card_id)
 
