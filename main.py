@@ -6,6 +6,8 @@ import json
 
 app = Flask(__name__)
 
+app.secret_key = 'abcd1234'
+
 
 @app.route("/")
 def index(username=None, userid=None):
@@ -117,6 +119,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    print("main starts runnin")
-    app.secret_key = '14389r2zf897uihn2uo3ht/%WTE)qwőq'
+    
+
     app.run(debug=True)
