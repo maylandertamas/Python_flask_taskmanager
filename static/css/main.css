@@ -10,6 +10,20 @@ h2 {
     margin-bottom: 10px;
 }
 
+.navbar-inverse {
+    background-color: #4d4d4d;
+}
+
+.navbar {
+    border: none;
+    border-radius: 0px;
+}
+
+.navbar-btn {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
 #cards-container {
     margin-top: 20px;
     display: none;
