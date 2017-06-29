@@ -169,25 +169,25 @@ function cardDragger() {
         update: function(event, ui) {
             var newStatus = "new";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
 
         $( "#done" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "done";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
         
         $( "#in-progress" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "in-progress";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
         
         $( "#review" ).sortable({connectWith: ["#done", "#in-progress", "#review", "#new"],
         update: function(event, ui) {
             var newStatus = "review";
             changeCardStatus(ui, newStatus);
-        }});
+        }})
     });
 }
 
