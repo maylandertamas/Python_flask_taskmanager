@@ -65,13 +65,17 @@ function addNewBoard() {
         $('#add-board-button').click(function() {
 
             // Get the new board title from impu.
-            newBoardTitle = $(this).prev().val();
-            
-            $.ajax({
+            var newBoardTitle = $(this).prev().val();
+            if (newBoardTitle.length > 60) {
+                alert("Board title is too long!");
+                $("#input-field").val('');
+            } else {
+                $.ajax({
                 url: '/new-board',
                 data: {'title': $(this).prev().val()},
                 type: 'POST',
-            });
+                });
+            }
         printBoards();
     });
 }
@@ -79,13 +83,17 @@ function addNewBoard() {
 
 function addNewCard() {
     $(document).on('click', '#add-card-button', function () {
-        boardId = $(this).data("board-id");
-        cardTitle = $(this).prev().val();
+        var boardId = $(this).data("board-id");
+        var cardTitle = $(this).prev().val();
         
-        $.post("/add-new-card", {title: cardTitle, board_id: boardId}, function(data) {
-            $("#new").append("<div class='card actual-cards' data-card-id='" + data.data[0][0]
-                                                                    + "' >" + cardTitle + "</div>");
-        });
+            $.post("/add-new-card", {title: cardTitle, board_id: boardId}, function(data) {
+                if (cardTitle.length > 80) {
+                    alert("Card title is too long!")
+                    $("#card-input-field").val('');
+                } else {
+                    $("#new").append("<div class='card actual-cards' data-card-id='" + data.data[0][0] + "' >" + cardTitle + "</div>");
+                }
+            });                                                       
     });
 }
 
@@ -136,14 +144,20 @@ function changeTitle(boardId) {
 
         var boardIdChange = $("#dialog").data('board_id')
         var newBoardTitle = $("#change-title").val();
-        $.ajax({
-            url: "/change-board-title",
-            data: {'title': newBoardTitle, 'boardId': boardId},
-            type: 'POST'
-        })
-        $( "#dialog" ).dialog( "close" );
+        if (newBoardTitle.length > 60) {
+            alert("New board title is too long");
+            $("#change-title").val('');
+        } else {
+            $.ajax({
+                url: "/change-board-title",
+                data: {'title': newBoardTitle, 'boardId': boardId},
+                type: 'POST'
+            });
+        
+            $( "#dialog" ).dialog( "close" );
 
-        $("#boards-container").empty();
+            $("#boards-container").empty();
+        }
         return printBoards();
     });
 }
@@ -190,6 +204,7 @@ function loginAndRegistration() {
     }
 });
 }
+
 
 
 

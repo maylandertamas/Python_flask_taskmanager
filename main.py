@@ -1,6 +1,7 @@
-from flask import Flask, render_template, session, redirect, url_for, request, Response, jsonify
+from flask import Flask, flash, render_template, session, redirect, url_for, request, Response, jsonify
 from database_handler import database_handler
 from werkzeug.security import generate_password_hash, check_password_hash
+import json
 
 app = Flask(__name__)
 
@@ -80,7 +81,7 @@ def registration():
                     VALUES ($${0}$$, $${1}$$);".format(username, hashed_password), "write")
 
     if write_to_database == "error":
-        return '<a href="/"><button href= class="btn btn-default">Back</button></a><p>Username already exists</p>'
+        flash("Username already exists!")
 
     return redirect(url_for('index'))
 
@@ -94,7 +95,7 @@ def login():
     try:
         username_from_db = user_db_data[0][0]
     except IndexError:
-        return '<a href="/"><button href= class="btn btn-default">Back</button></a><p>Username not found<p>' 
+        flash("User name does not exist!")
     else:
         user_pw_from_db = user_db_data[0][1]
         remove_white_spaces_from_pw = user_pw_from_db.strip()
@@ -103,8 +104,7 @@ def login():
             session['username'] = username_from_db
             session['userid'] = user_db_data[0][2]
         else:
-            return '<a href="/"><button href= class="btn btn-default">Back</button></a><p>Invalid password<p>'
-
+            flash('Invalid Password')
     return redirect(url_for('index'))
 
 
