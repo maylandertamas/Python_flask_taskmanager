@@ -76,7 +76,7 @@ def registration():
     username = request.form['username']
     password = request.form['password']
     hashed_password = generate_password_hash(password, "pbkdf2:sha224", 1)
-
+    print("registration in work")
     write_to_database = database_handler("INSERT INTO users (username, password)\
                     VALUES ($${0}$$, $${1}$$);".format(username, hashed_password), "write")
 
