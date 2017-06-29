@@ -15,7 +15,7 @@ def connect_to_database():
         urllib.parse.uses_netloc.append('postgres')
         url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
         conn = psycopg2.connect(
-            dat base=url.path[1:],
+            database=url.path[1:],
             user=url.username,
             password=url.password,
             host=url.hostname,
