@@ -92,6 +92,13 @@
             </div>
         </div>
     </div>
+        {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+               <h4>{{ message }}</h4>
+               {% endfor %}
+         {% endif %}
+      {% endwith %}
         {% if username %}
             {% block content %}
             {% endblock %}
@@ -104,5 +111,6 @@
             <p id="mr-cat-msg2" style="background-color: white; display:none; position:absolute; top:70px; right:260px; font-size:25px">Hmpf...</p>
             <div id="thx-cat" style="display:none"><button class="btn btn-default" id="thx-cat-btn">Thanks Mighty Cat!</button></div>
         {% endif %}
+        
     </body>
 </html>
