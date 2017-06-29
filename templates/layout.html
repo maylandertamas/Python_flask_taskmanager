@@ -100,8 +100,16 @@
          {% endif %}
       {% endwith %}
         {% if username %}
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
+        {% endif %}
+        {% if username == None %}
+            <p>Maybe log in? eh?</p>
+            <button class="btn btn-default" id="help-mr-cat">I need thy help Mighty Cat to register!</button>
+            <div id="mr-cat" style="display:none; position:absolute; top:50px; left:-480px"><img src="../static/img/mrcat.jpg" alt="grumpy-cat" height="360px" width="480px" /></div>
+            <p id="mr-cat-msg1" style="background-color: white; display:none; position:absolute; top:70px; right:75px; font-size:18px">Maybe you should try clicking on the Sign up button...</p>
+            <p id="mr-cat-msg2" style="background-color: white; display:none; position:absolute; top:70px; right:260px; font-size:25px">Hmpf...</p>
+            <div id="thx-cat" style="display:none"><button class="btn btn-default" id="thx-cat-btn">Thanks Mighty Cat!</button></div>
         {% endif %}
         
     </body>

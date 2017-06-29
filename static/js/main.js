@@ -205,6 +205,27 @@ function loginAndRegistration() {
 });
 }
 
+function mrCat() {
+    $('#help-mr-cat').click(function(){
+        $('#help-mr-cat').fadeOut();
+        $('#mr-cat').show();
+        $('#mr-cat').animate({left: "+=1000"}, 3000, function(){
+            $('#mr-cat-msg1').fadeIn();
+            $('#thx-cat').fadeIn();
+        });
+    });
+}
+
+function mrCatAway() {
+    $('#thx-cat-btn').click(function(){
+        $('#mr-cat-msg1').fadeOut();
+        $('#mr-cat-msg2').fadeIn(function(){
+            $('#mr-cat-msg2').fadeOut();
+            $('#mr-cat').animate({left: "-=1000"}, 3000);
+            $('#thx-cat').fadeOut();
+        });
+    });
+}
 
 
 
@@ -233,6 +254,8 @@ function main() {
     // Clog spin.
     clogSpin();
     loginAndRegistration();
+    mrCat();
+    mrCatAway();
 }
 
 $(document).ready(main);

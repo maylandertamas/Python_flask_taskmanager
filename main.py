@@ -3,6 +3,7 @@ from database_handler import database_handler
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
+
 app = Flask(__name__)
 
 
@@ -38,7 +39,7 @@ def add_new_card():
     card_status = "new"
     card_board_id = request.form['board_id']
     database_handler("INSERT INTO cards (title, status, boards_id) VALUES \
-                                        ('{0}', '{1}', '{2}');".format(card_title, card_status, card_board_id), 'write')
+                                        ('{0}', '{1}', {2});".format(card_title, card_status, card_board_id), 'write')
     card_id = database_handler("SELECT id FROM cards ORDER BY id DESC LIMIT 1;")
     return jsonify(data=card_id)
 
@@ -116,5 +117,6 @@ def logout():
 
 
 if __name__ == '__main__':
+    print("main starts runnin")
     app.secret_key = '14389r2zf897uihn2uo3ht/%WTE)qwőq'
     app.run(debug=True)
