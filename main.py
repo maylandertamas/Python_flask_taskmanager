@@ -5,10 +5,6 @@ from database_handler import database_handler
 
 app = Flask(__name__)
 
-app.config['SESSION_TYPE'] = 'memcached'
-app.config['SECRET_KEY'] = 'supersecretkey'
-sess = Session()
-
 
 @app.route("/")
 def index(username=None, userid=None):
@@ -124,5 +120,12 @@ if __name__ == '__main__':
     #app.secret_key = 'abcd1234'
     #app.config['SESSION_TYPE'] = 'filesystem'
     #sess.init_app(app)
+
+    sess.init_app(app)
+
+    app.config['SESSION_TYPE'] = 'memcached'
+    app.config['SECRET_KEY'] = 'supersecretkey'
+    sess = Session()
+    app.secret_key()
 
     app.run(debug=True)
