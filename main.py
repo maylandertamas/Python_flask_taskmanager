@@ -4,15 +4,6 @@ import os
 import psycopg2
 import urllib
 
-urllib.parse.uses_netloc.append('postgres')
-url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
-connection = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
 
 app = Flask(__name__)
 
@@ -20,8 +11,16 @@ app = Flask(__name__)
 def connect_to_database():
     print("trying to connect db")
     try:
-        print("successfully connected")
-        conn = psycopg2.connect("dbname='proman' user=''")
+        urllib.parse.uses_netloc.append('postgres')
+        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+        conn = connection = psycopg2.connect(
+            dat base=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
+
     except psycopg2.Error as error:
         print("Couldn't connect to database")
         print(error)
