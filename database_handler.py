@@ -1,12 +1,35 @@
-import psycopg2
 import sys
+import os
+import psycopg2
+import urllib
+
+"""
+:Local connection to db
+
+def connect_to_database():
+    try:
+        conn = psycopg2.connect("dbname='SI5_starwars' user=''")
+    except psycopg2.Error as error:
+        print("Couldn't connect to database")
+        print(error)
+        sys.exit(1)
+    else:
+        return conn
+"""
 
 
 def connect_to_database():
     try:
-        conn = psycopg2.connect("dbname='proman' user=''")
+        urllib.parse.uses_netloc.append('postgres')
+        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+        conn = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
     except psycopg2.Error as error:
-        print("Couldn't connect to database")
         print(error)
         sys.exit(1)
     else:
