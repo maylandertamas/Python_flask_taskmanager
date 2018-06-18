@@ -1,1 +1,1 @@
-Webshop with python
+Cardboard task manager implemented with python
